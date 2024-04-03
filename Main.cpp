@@ -11,11 +11,12 @@ bool endingAnimation = false;
 
 int main(void)
 {
-	// Option to have all arrows that point to the same direction with the same color
+	// TODO (maybe): Option to have all arrows that point to the same direction with the same color
 
 	InitWindow(800, 600, "Stratagem Citizen");
 
-	Image image = LoadImage("Assets/Arrow Up.png");
+	Image arrowUpImage = LoadImage("Assets/Arrow Up.png");
+	Image arrowDownImage = LoadImage("Assets/Arrow Down.png");
 
 	Color color{};
 	color.r = 255;
@@ -23,8 +24,11 @@ int main(void)
 	color.b = 255;
 	color.a = 255;
 
-	Arrow arrow = Arrow(image, color, { 270, 260 });
-	Arrow arrow2 = Arrow(image, color, { 360, 260 });
+	Vector2 arrowOnePos{ 270, 260 };
+	Vector2 arrowTwoPos{ 360, 260 };
+
+	Arrow arrow = Arrow(arrowUpImage, color, arrowOnePos, KEY_UP);
+	Arrow arrow2 = Arrow(arrowDownImage, color, arrowTwoPos, KEY_DOWN);
 
 	float posY = initialPosY;
 
@@ -35,8 +39,11 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 
+		arrow.Input();
+
 		if (arrow.GetPressed())
 		{
+			arrow2.Input();
 			arrow2.Update();
 		}
 
@@ -48,7 +55,8 @@ int main(void)
 		EndDrawing();
 	}
 
-	UnloadImage(image);
+	UnloadImage(arrowUpImage);
+	UnloadImage(arrowDownImage);
 
 	return 0;
 }
