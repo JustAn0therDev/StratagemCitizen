@@ -1,22 +1,27 @@
 #include "Arrow.h"
 #include "raylib.h"
 #include "raymath.h"
+#include <string>
 
-Arrow::Arrow(Image p_Image, Color p_Color, Vector2 p_Pos, KeyboardKey p_keyboardKey)
+Arrow::Arrow(const char* p_ImageFileName, Color p_Color, Vector2 p_Pos, KeyboardKey p_KeyboardKey) : m_EndingAnimation(false), m_Interacted(false)
 {
-	this->m_Texture = LoadTextureFromImage(p_Image);
+	Image image = LoadImage(p_ImageFileName);
+	this->m_Texture = LoadTextureFromImage(image);
+	UnloadImage(image);
+	
 	this->m_Color = p_Color;
 	this->m_Pos = p_Pos;
-	this->m_KeyboardKey = p_keyboardKey;
+	this->m_KeyboardKey = p_KeyboardKey;
 }
 
-void Arrow::Input()
+bool Arrow::Input()
 {
 	if (IsKeyPressed(m_KeyboardKey))
 	{
 		m_Interacted = true;
-		m_Pressed = true;
 	}
+
+	return m_Interacted;
 }
 
 void Arrow::Update()
@@ -32,12 +37,12 @@ void Arrow::Update()
 	}
 }
 
-void Arrow::Draw() const
+void Arrow::Draw()
 {
-	DrawTexture(m_Texture, m_Pos.x, static_cast<int>(m_Pos.y), m_Color);
+	DrawTexture(m_Texture, static_cast<int>(m_Pos.x), static_cast<int>(m_Pos.y), m_Color);
 }
 
-bool Arrow::GetPressed() const
+void Arrow::UnloadResources()
 {
-	return m_Pressed;
+	UnloadTexture(m_Texture);
 }
