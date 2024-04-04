@@ -3,7 +3,7 @@
 #include "raymath.h"
 #include <string>
 
-Arrow::Arrow(const char* p_ImageFileName, Color p_Color, Vector2 p_Pos, KeyboardKey p_KeyboardKey) : m_EndingAnimation(false), m_Interacted(false)
+Arrow::Arrow(const char* p_ImageFileName, Color p_Color, Vector2 p_Pos, KeyboardKey p_KeyboardKey) : m_EndingAnimation(false), m_PressedCorrectButton(false)
 {
 	Image image = LoadImage(p_ImageFileName);
 	this->m_Texture = LoadTextureFromImage(image);
@@ -18,15 +18,15 @@ bool Arrow::Input()
 {
 	if (IsKeyPressed(m_KeyboardKey))
 	{
-		m_Interacted = true;
+		m_PressedCorrectButton = true;
 	}
 
-	return m_Interacted;
+	return m_PressedCorrectButton;
 }
 
 void Arrow::Update()
 {
-	if (m_Interacted)
+	if (m_PressedCorrectButton)
 	{
 		if (m_Color.b > 0)
 		{

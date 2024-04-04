@@ -19,9 +19,9 @@ void Stratagem::Input()
 		return;
 	}
 
-	bool interacted = m_Arrows[m_Index].Input();
+	bool pressedCorrectButton = m_Arrows[m_Index].Input();
 
-	if (interacted)
+	if (pressedCorrectButton)
 	{
 		m_Index++;
 	}
@@ -37,7 +37,7 @@ void Stratagem::Update()
 
 void Stratagem::Draw()
 {
-	DrawTexture(m_Texture, m_ImagePosition.x, m_ImagePosition.y, WHITE);
+	DrawTexture(m_Texture, static_cast<int>(m_ImagePosition.x), static_cast<int>(m_ImagePosition.y), WHITE);
 
 	for (auto& arrow : m_Arrows)
 		arrow.Draw();
