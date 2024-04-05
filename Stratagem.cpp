@@ -1,4 +1,5 @@
 #include "Stratagem.h"
+#include "Constants.h"
 
 Stratagem::Stratagem(const char* p_ImageFileName, Vector2 p_ImagePosition, std::vector<Arrow> p_Arrows, const char* p_Name) : m_Finished(false), m_Index(0)
 {
@@ -9,6 +10,13 @@ Stratagem::Stratagem(const char* p_ImageFileName, Vector2 p_ImagePosition, std::
 	this->m_Arrows = p_Arrows;
 	this->m_Name = p_Name;
 	this->m_ImagePosition = p_ImagePosition;
+
+	m_HalfOfArrowImageWidth = static_cast<float>(ARROW_IMAGE_WIDTH) / 2;
+	m_ArrowImageOffset = ARROW_IMAGE_WIDTH + m_HalfOfArrowImageWidth;
+	m_InitialPosX = ((static_cast<float>(WINDOW_WIDTH) / 2) - m_HalfOfArrowImageWidth) - m_HalfOfArrowImageWidth * (m_Arrows.size() - 1);
+	m_InitialPosY = DEFAULT_ARROW_HEIGHT - m_HalfOfArrowImageWidth;
+
+	this->CalculateArrowPositions();
 }
 
 void Stratagem::Input()
@@ -54,4 +62,15 @@ void Stratagem::UnloadResources()
 		arrow.UnloadResources();
 
 	UnloadTexture(m_Texture);
+}
+
+void Stratagem::CalculateArrowPositions()
+{
+	for (size_t i = 0; i < m_Arrows.size(); i++)
+	{
+		if (i == 0)
+			m_Arrows[i].SetPos({ m_InitialPosX, m_InitialPosY });
+		else
+			m_Arrows[i].SetPos({ m_InitialPosX + m_ArrowImageOffset * i, m_InitialPosY });
+	}
 }

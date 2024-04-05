@@ -13,6 +13,10 @@ private:
 	const char* m_Name;
 	bool m_Finished;
 	int m_Index;
+	float m_HalfOfArrowImageWidth;
+	float m_ArrowImageOffset;
+	float m_InitialPosX;
+	float m_InitialPosY;
 
 public:
 	Stratagem(const char* p_ImageFileName, Vector2 p_ImagePosition, std::vector<Arrow> p_Arrows, const char* p_Name);
@@ -21,5 +25,6 @@ public:
 	void Draw();
 	bool GetFinished() const;
 	void UnloadResources();
+	void CalculateArrowPositions();
 };
 

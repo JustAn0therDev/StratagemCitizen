@@ -3,6 +3,7 @@
 #include "raymath.h"
 #include "Arrow.h"
 #include "Stratagem.h"
+#include "Constants.h"
 
 const int initialPosY = 260;
 const int posYLimit = 40;
@@ -14,8 +15,14 @@ int main(void)
 {
 	// TODO (maybe): Option to have all arrows that point to the same direction with the same color
 
-	InitWindow(800, 600, "Stratagem Citizen");
+	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Stratagem Citizen");
 
+	float halfOfArrowImageWidth = static_cast<float>(ARROW_IMAGE_WIDTH) / 2;
+	float arrowImageOffset = ARROW_IMAGE_WIDTH + halfOfArrowImageWidth;
+	float initialPosX = (static_cast<float>(WINDOW_WIDTH) / 2) - halfOfArrowImageWidth;
+	float initialPosY = DEFAULT_ARROW_HEIGHT - halfOfArrowImageWidth;
+
+	// TODO: The color should be defined inside the arrow.
 	Color color{};
 	color.r = 255;
 	color.g = 255;
@@ -24,18 +31,13 @@ int main(void)
 
 	Vector2 stratagemPos{ 100, 60 };
 	
-	Vector2 arrowOnePos{ 270, 260 };
-	Vector2 arrowTwoPos{ 360, 260 };
-	Vector2 arrowThreePos{ 450, 260 };
-	Vector2 arrowFourPos{ 540, 260 };
-	Vector2 arrowFivePos{ 630, 260 };
+	Arrow arrow = Arrow("Assets/Arrow Up.png", color, KEY_UP);
+	Arrow arrow2 = Arrow("Assets/Arrow Right.png", color, KEY_RIGHT);
+	Arrow arrow3 = Arrow("Assets/Arrow Down.png", color, KEY_DOWN);
+	Arrow arrow4 = Arrow("Assets/Arrow Down.png", color, KEY_DOWN);
+	Arrow arrow5 = Arrow("Assets/Arrow Down.png", color, KEY_DOWN);
 
-	Arrow arrow = Arrow("Assets/Arrow Up.png", color, arrowOnePos, KEY_UP);
-	Arrow arrow2 = Arrow("Assets/Arrow Right.png", color, arrowTwoPos, KEY_RIGHT);
-	Arrow arrow3 = Arrow("Assets/Arrow Down.png", color, arrowThreePos, KEY_DOWN);
-	Arrow arrow4 = Arrow("Assets/Arrow Down.png", color, arrowFourPos, KEY_DOWN);
-	Arrow arrow5 = Arrow("Assets/Arrow Down.png", color, arrowFivePos, KEY_DOWN);
-
+	// TODO: Use a big amount of arrows to test their positions on the screen.
 	std::vector<Arrow> arrows;
 	arrows.reserve(5);
 	arrows.emplace_back(arrow);
@@ -55,13 +57,17 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 
+		// NOTES(Ruan): a VERY simple way to debug if things are, in fact, in the middle of the screen
+		DrawLine(WINDOW_WIDTH/2, 0, WINDOW_WIDTH/2, WINDOW_HEIGHT, GREEN);
+		DrawLine(0, WINDOW_HEIGHT/2, WINDOW_WIDTH, WINDOW_HEIGHT / 2, GREEN);
+
 		eagleStratagem.Input();
 		eagleStratagem.Update();
 		eagleStratagem.Draw();
 
 		if (eagleStratagem.GetFinished())
 		{
-			break;
+			//break;
 		}
 		
 		EndDrawing();
