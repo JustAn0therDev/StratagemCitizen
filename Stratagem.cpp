@@ -11,11 +11,6 @@ Stratagem::Stratagem(const char* p_ImageFileName, Vector2 p_ImagePosition, std::
 	this->m_Name = p_Name;
 	this->m_ImagePosition = p_ImagePosition;
 
-	m_HalfOfArrowImageWidth = static_cast<float>(ARROW_IMAGE_WIDTH) / 2;
-	m_ArrowImageOffset = ARROW_IMAGE_WIDTH + m_HalfOfArrowImageWidth;
-	m_InitialPosX = ((static_cast<float>(WINDOW_WIDTH) / 2) - m_HalfOfArrowImageWidth) - m_HalfOfArrowImageWidth * (m_Arrows.size() - 1);
-	m_InitialPosY = DEFAULT_ARROW_HEIGHT - m_HalfOfArrowImageWidth;
-
 	this->CalculateArrowPositions();
 }
 
@@ -66,11 +61,14 @@ void Stratagem::UnloadResources()
 
 void Stratagem::CalculateArrowPositions()
 {
+	// FIXME: calculate this better :)
+	m_HalfOfArrowImageWidth = static_cast<float>(ARROW_IMAGE_WIDTH) / 2;
+	m_ArrowImageOffset = ARROW_IMAGE_WIDTH + m_HalfOfArrowImageWidth;
+	m_InitialPosX = ((static_cast<float>(WINDOW_WIDTH) / 2) - m_HalfOfArrowImageWidth) - m_HalfOfArrowImageWidth * m_Arrows.size();
+	m_InitialPosY = DEFAULT_ARROW_HEIGHT - m_HalfOfArrowImageWidth;
+
 	for (size_t i = 0; i < m_Arrows.size(); i++)
 	{
-		if (i == 0)
-			m_Arrows[i].SetPos({ m_InitialPosX, m_InitialPosY });
-		else
-			m_Arrows[i].SetPos({ m_InitialPosX + m_ArrowImageOffset * i, m_InitialPosY });
+		m_Arrows[i].SetPos({ m_InitialPosX + m_ArrowImageOffset * i, m_InitialPosY });
 	}
 }

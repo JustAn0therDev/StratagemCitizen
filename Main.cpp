@@ -22,22 +22,14 @@ int main(void)
 	float initialPosX = (static_cast<float>(WINDOW_WIDTH) / 2) - halfOfArrowImageWidth;
 	float initialPosY = DEFAULT_ARROW_HEIGHT - halfOfArrowImageWidth;
 
-	// TODO: The color should be defined inside the arrow.
-	Color color{};
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
-	color.a = 255;
-
 	Vector2 stratagemPos{ 100, 60 };
 	
-	Arrow arrow = Arrow("Assets/Arrow Up.png", color, KEY_UP);
-	Arrow arrow2 = Arrow("Assets/Arrow Right.png", color, KEY_RIGHT);
-	Arrow arrow3 = Arrow("Assets/Arrow Down.png", color, KEY_DOWN);
-	Arrow arrow4 = Arrow("Assets/Arrow Down.png", color, KEY_DOWN);
-	Arrow arrow5 = Arrow("Assets/Arrow Down.png", color, KEY_DOWN);
+	Arrow arrow = Arrow("Assets/Arrow Up.png", KEY_UP);
+	Arrow arrow2 = Arrow("Assets/Arrow Right.png", KEY_RIGHT);
+	Arrow arrow3 = Arrow("Assets/Arrow Down.png", KEY_DOWN);
+	Arrow arrow4 = Arrow("Assets/Arrow Down.png", KEY_DOWN);
+	Arrow arrow5 = Arrow("Assets/Arrow Down.png", KEY_DOWN);
 
-	// TODO: Use a big amount of arrows to test their positions on the screen.
 	std::vector<Arrow> arrows;
 	arrows.reserve(5);
 	arrows.emplace_back(arrow);

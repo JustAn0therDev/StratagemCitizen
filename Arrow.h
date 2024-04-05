@@ -16,7 +16,7 @@ private:
 	Texture2D m_Texture;
 
 public:
-	Arrow(const char* p_ImageFileName, Color p_Color, KeyboardKey p_KeyboardKey);
+	Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey);
 	bool Input();
 	void Update();
 	void Draw();

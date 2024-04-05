@@ -3,13 +3,13 @@
 #include "raymath.h"
 #include <string>
 
-Arrow::Arrow(const char* p_ImageFileName, Color p_Color, KeyboardKey p_KeyboardKey) : m_EndingAnimation(false), m_PressedCorrectButton(false)
+Arrow::Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey) : m_EndingAnimation(false), m_PressedCorrectButton(false)
 {
 	Image image = LoadImage(p_ImageFileName);
 	this->m_Texture = LoadTextureFromImage(image);
 	UnloadImage(image);
 	
-	this->m_Color = p_Color;
+	this->m_Color = WHITE;
 	this->m_KeyboardKey = p_KeyboardKey;
 }
 
