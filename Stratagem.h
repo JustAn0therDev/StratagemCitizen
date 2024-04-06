@@ -19,7 +19,8 @@ private:
 	float m_InitialPosY;
 
 public:
-	Stratagem(const char* p_ImageFileName, Vector2 p_ImagePosition, std::vector<Arrow> p_Arrows, const char* p_Name);
+	Stratagem(const char* p_ImageFileName, std::vector<Arrow> p_Arrows, const char* p_Name);
+	void LoadStratagemImageTexture(const char* p_ImageFileName);
 	void Input();
 	void Update();
 	void Draw();

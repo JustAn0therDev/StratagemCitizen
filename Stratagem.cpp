@@ -1,17 +1,30 @@
 #include "Stratagem.h"
 #include "Constants.h"
 
-Stratagem::Stratagem(const char* p_ImageFileName, Vector2 p_ImagePosition, std::vector<Arrow> p_Arrows, const char* p_Name) : m_Finished(false), m_Index(0)
+Stratagem::Stratagem(const char* p_ImageFileName, std::vector<Arrow> p_Arrows, const char* p_Name) : m_ImagePosition({ 200, 100 }), m_Finished(false), m_Index(0)
 {
-	Image image = LoadImage(p_ImageFileName);
-	this->m_Texture = LoadTextureFromImage(image);
-	UnloadImage(image);
-
+	LoadStratagemImageTexture(p_ImageFileName);
 	this->m_Arrows = p_Arrows;
 	this->m_Name = p_Name;
-	this->m_ImagePosition = p_ImagePosition;
 
 	this->CalculateArrowPositions();
+}
+
+void Stratagem::LoadStratagemImageTexture(const char* p_ImageFileName)
+{
+	// TODO(Ruan): For now, I'll resize the images that are too big.
+	// In an ideal scenario, the images would always have the same size.
+	// This method still contains an inherit problem, that being images that are
+	// smaller than the limit.
+	Image image = LoadImage(p_ImageFileName);
+
+	if (image.height > STRATAGEM_IMAGE_HEIGHT_LIMIT && image.width > STRATAGEM_IMAGE_WIDTH_LIMIT)
+	{
+		ImageResize(&image, STRATAGEM_IMAGE_WIDTH_LIMIT, STRATAGEM_IMAGE_HEIGHT_LIMIT);
+	}
+
+	this->m_Texture = LoadTextureFromImage(image);
+	UnloadImage(image);
 }
 
 void Stratagem::Input()
@@ -40,7 +53,9 @@ void Stratagem::Update()
 
 void Stratagem::Draw()
 {
-	DrawTexture(m_Texture, static_cast<int>(m_ImagePosition.x), static_cast<int>(m_ImagePosition.y), WHITE);
+	//DrawTexture(m_Texture, static_cast<int>(m_ImagePosition.x), static_cast<int>(m_ImagePosition.y), WHITE);
+
+	DrawTextureEx(m_Texture, m_ImagePosition, 0, 0.5f, WHITE);
 
 	for (auto& arrow : m_Arrows)
 		arrow.Draw();

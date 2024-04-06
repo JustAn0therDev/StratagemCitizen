@@ -11,9 +11,11 @@ private:
 	KeyboardKey m_KeyboardKey;
 	Vector2 m_Pos;
 	bool m_PressedCorrectButton = false;
-	bool m_EndingAnimation = false;
+	bool m_PressedWrongButton = false;
 	Color m_Color;
 	Texture2D m_Texture;
+
+	bool PressedCorrectArrowKey();
 
 public:
 	Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey);

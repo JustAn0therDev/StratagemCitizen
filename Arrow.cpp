@@ -3,7 +3,7 @@
 #include "raymath.h"
 #include <string>
 
-Arrow::Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey) : m_EndingAnimation(false), m_PressedCorrectButton(false)
+Arrow::Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey) : m_PressedCorrectButton(false), m_Pos({ 0 })
 {
 	Image image = LoadImage(p_ImageFileName);
 	this->m_Texture = LoadTextureFromImage(image);
@@ -13,11 +13,27 @@ Arrow::Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey) : m_EndingA
 	this->m_KeyboardKey = p_KeyboardKey;
 }
 
+bool Arrow::PressedCorrectArrowKey()
+{
+	bool pressedUpAndWasUp = IsKeyPressed(m_KeyboardKey) && m_KeyboardKey == KEY_UP;
+	bool pressedRightAndWasRight = IsKeyPressed(m_KeyboardKey) && m_KeyboardKey == KEY_RIGHT;
+	bool pressedLeftAndWasLeft = IsKeyPressed(m_KeyboardKey) && m_KeyboardKey == KEY_LEFT;
+	bool pressedDownAndWasDown = IsKeyPressed(m_KeyboardKey) && m_KeyboardKey == KEY_DOWN;
+
+	return pressedUpAndWasUp || pressedDownAndWasDown || pressedLeftAndWasLeft || pressedRightAndWasRight;
+}
+
 bool Arrow::Input()
 {
-	if (IsKeyPressed(m_KeyboardKey))
+	bool pressedCorrectArrowKey = PressedCorrectArrowKey();
+
+	if (pressedCorrectArrowKey)
 	{
 		m_PressedCorrectButton = true;
+	}
+	else
+	{
+		// TODO: Check if the key pressed was an arrow key.
 	}
 
 	return m_PressedCorrectButton;
@@ -27,11 +43,27 @@ void Arrow::Update()
 {
 	if (m_PressedCorrectButton)
 	{
+		m_PressedWrongButton = false;
+	
 		if (m_Color.b > 0)
 		{
 			m_Color.b = (int)Clamp(Lerp(m_Color.b, 0, m_LerpBy), 0, 255);
 			m_Color.a = (int)Clamp(Lerp(m_Color.a, 0, m_LerpBy), 0, 255);
 			m_Pos.y = Lerp(m_Pos.y, m_InitialPosY - m_PosYLimit, m_LerpBy);
+		}
+	}
+	
+	if (m_PressedWrongButton)
+	{
+		if (m_Color.b > 0)
+		{
+			m_Color.b = (int)Clamp(Lerp(m_Color.b, 0, m_LerpBy), 0, 255);
+			m_Color.g = (int)Clamp(Lerp(m_Color.g, 0, m_LerpBy), 0, 255);
+		}
+		else
+		{
+			m_PressedWrongButton = false;
+			m_Color = WHITE;
 		}
 	}
 }
