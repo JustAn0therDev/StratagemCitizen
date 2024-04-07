@@ -16,6 +16,7 @@ private:
 	Texture2D m_Texture;
 
 	bool PressedCorrectArrowKey();
+	bool KeyPressedWasAnArrowKey();
 
 public:
 	Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey);

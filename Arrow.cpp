@@ -23,6 +23,11 @@ bool Arrow::PressedCorrectArrowKey()
 	return pressedUpAndWasUp || pressedDownAndWasDown || pressedLeftAndWasLeft || pressedRightAndWasRight;
 }
 
+bool Arrow::KeyPressedWasAnArrowKey()
+{
+	return IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_DOWN);
+}
+
 bool Arrow::Input()
 {
 	bool pressedCorrectArrowKey = PressedCorrectArrowKey();
@@ -31,9 +36,9 @@ bool Arrow::Input()
 	{
 		m_PressedCorrectButton = true;
 	}
-	else
+	else if (KeyPressedWasAnArrowKey())
 	{
-		// TODO: Check if the key pressed was an arrow key.
+		m_PressedWrongButton = true;
 	}
 
 	return m_PressedCorrectButton;
