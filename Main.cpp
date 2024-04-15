@@ -13,6 +13,7 @@ bool endingAnimation = false;
 
 int main(void)
 {
+	// TODO (next thing): Create a parser to check an input file containing all stratagem information (for now there are only three: title, arrow sequence, icon).
 	// TODO (maybe): Option to have all arrows that point to the same direction with the same color
 
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Stratagem Citizen");
@@ -31,7 +32,7 @@ int main(void)
 	arrows.emplace_back(arrow4);
 	arrows.emplace_back(arrow5);
 
-	Stratagem eagleStratagem = Stratagem("Assets/eagle-500kg-bomb.png", arrows, "Eagle 500 KG Bomb");
+	Stratagem eagleStratagem = Stratagem("Eagle 500 KG Bomb", arrows, "Assets/eagle-500kg-bomb.png");
 
 	Arrow quasarArrow = Arrow("Assets/Arrow Down.png", KEY_DOWN);
 	Arrow quasarArrow2 = Arrow("Assets/Arrow Down.png", KEY_DOWN);
@@ -47,7 +48,7 @@ int main(void)
 	quasarArrows.emplace_back(quasarArrow4);
 	quasarArrows.emplace_back(quasarArrow5);
 
-	Stratagem quasarCannonStratagem = Stratagem("Assets/quasar-cannon.png", quasarArrows, "Quasar Cannon");
+	Stratagem quasarCannonStratagem = Stratagem("Quasar Cannon", quasarArrows, "Assets/quasar-cannon.png");
 
 	Arrow orbital380Arrow = Arrow("Assets/Arrow Right.png", KEY_RIGHT);
 	Arrow orbital380Arrow2 = Arrow("Assets/Arrow Down.png", KEY_DOWN);
@@ -71,7 +72,7 @@ int main(void)
 	orbital380Arrows.emplace_back(orbital380Arrow8);
 	orbital380Arrows.emplace_back(orbital380Arrow9);
 
-	Stratagem orbital380Stratagem = Stratagem("Assets/orbital-380mm-he-barrage.png", orbital380Arrows, "Orbital 380Mm He Barrage");
+	Stratagem orbital380Stratagem = Stratagem("Orbital 380Mm He Barrage", orbital380Arrows, "Assets/orbital-380mm-he-barrage.png");
 
 	std::vector<Stratagem> stratagems;
 	stratagems.emplace_back(eagleStratagem);
@@ -86,9 +87,11 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 
+#ifdef _DEBUG
 		// NOTES(Ruan): a VERY simple way to debug if things are, in fact, in the middle of the screen
 		DrawLine(WINDOW_WIDTH/2, 0, WINDOW_WIDTH/2, WINDOW_HEIGHT, GREEN);
 		DrawLine(0, WINDOW_HEIGHT/2, WINDOW_WIDTH, WINDOW_HEIGHT / 2, GREEN);
+#endif
 
 		stratagems[index].Input();
 		stratagems[index].Update();

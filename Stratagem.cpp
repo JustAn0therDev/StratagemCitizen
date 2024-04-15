@@ -1,7 +1,7 @@
 #include "Stratagem.h"
 #include "Constants.h"
 
-Stratagem::Stratagem(const char* p_ImageFileName, std::vector<Arrow> p_Arrows, const char* p_Name) : m_ImagePosition({ 200, 100 }), m_Finished(false), m_Index(0)
+Stratagem::Stratagem(const char* p_Name, std::vector<Arrow> p_Arrows, const char* p_ImageFileName) : m_ImagePosition({ 200, 100 }), m_Finished(false), m_Index(0)
 {
 	LoadStratagemImageTexture(p_ImageFileName);
 	this->m_Arrows = p_Arrows;
