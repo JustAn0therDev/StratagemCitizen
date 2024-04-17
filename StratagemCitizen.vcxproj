@@ -134,12 +134,14 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Stratagem.cpp" />
     <ClCompile Include="StratagemConfigParser.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Stratagem.h" />
     <ClInclude Include="StratagemConfigParser.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

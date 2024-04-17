@@ -50,20 +50,21 @@ void Arrow::Update()
 	{
 		m_PressedWrongButton = false;
 	
-		if (m_Color.b > 0)
+		if (m_Color.a > 0)
 		{
-			m_Color.b = (int)Clamp(Lerp(m_Color.b, 0, m_LerpBy), 0, 255);
-			m_Color.a = (int)Clamp(Lerp(m_Color.a, 0, m_LerpBy), 0, 255);
+			m_Color.r = static_cast<int>(Clamp(Lerp(m_Color.r, 255, m_LerpBy), 0, 255));
+			m_Color.g = static_cast<int>(Clamp(Lerp(m_Color.g, 255, m_LerpBy), 0, 255));
+			m_Color.b = static_cast<int>(Clamp(Lerp(m_Color.b, 0, m_LerpBy), 0, 255));
+			m_Color.a = static_cast<int>(Clamp(Lerp(m_Color.a, 0, m_LerpBy), 0, 255));
 			m_Pos.y = Lerp(m_Pos.y, m_InitialPosY - m_PosYLimit, m_LerpBy);
 		}
 	}
-	
-	if (m_PressedWrongButton)
+	else if (m_PressedWrongButton)
 	{
 		if (m_Color.b > 0)
 		{
-			m_Color.b = (int)Clamp(Lerp(m_Color.b, 0, m_LerpBy), 0, 255);
-			m_Color.g = (int)Clamp(Lerp(m_Color.g, 0, m_LerpBy), 0, 255);
+			m_Color.g = static_cast<int>(Clamp(Lerp(m_Color.g, 0, m_LerpBy), 0, 255));
+			m_Color.b = static_cast<int>(Clamp(Lerp(m_Color.b, 0, m_LerpBy), 0, 255));
 		}
 		else
 		{

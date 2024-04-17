@@ -53,8 +53,6 @@ void Stratagem::Update()
 
 void Stratagem::Draw()
 {
-	//DrawTexture(m_Texture, static_cast<int>(m_ImagePosition.x), static_cast<int>(m_ImagePosition.y), WHITE);
-
 	DrawTextureEx(m_Texture, m_ImagePosition, 0, 0.5f, WHITE);
 
 	for (auto& arrow : m_Arrows)
