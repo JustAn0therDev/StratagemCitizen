@@ -5,6 +5,8 @@
 #include "Stratagem.h"
 #include "Constants.h"
 #include "StratagemConfigParser.h"
+#include "TitleScene.h"
+#include "GameScene.h"
 
 const int initialPosY = 260;
 const int posYLimit = 40;
@@ -24,6 +26,9 @@ int main(void)
 	int index = 0;
 	std::vector<Stratagem> stratagems = stratagemConfigParser.GetStratagems();
 
+	TitleScene* titleScene = new TitleScene();
+	GameScene* gameScene = new GameScene(stratagems);
+
 	while (!WindowShouldClose())
 	{
 		SetTargetFPS(60);
@@ -31,30 +36,24 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 
-#ifdef _DEBUG
-		// NOTES(Ruan): a VERY simple way to debug if things are, in fact, in the middle of the screen
-		DrawLine(WINDOW_WIDTH/2, 0, WINDOW_WIDTH/2, WINDOW_HEIGHT, GREEN);
-		DrawLine(0, WINDOW_HEIGHT/2, WINDOW_WIDTH, WINDOW_HEIGHT / 2, GREEN);
-#endif
+		if (titleScene != nullptr) {
+			titleScene->Input();
+			titleScene->Update();
+			titleScene->Draw();
 
-		stratagems[index].Input();
-		stratagems[index].Update();
-		stratagems[index].Draw();
-
-		if (stratagems[index].GetFinished())
-		{
-			index++;
+			if (titleScene->GetShouldEndScene()) {
+				delete titleScene;
+				titleScene = nullptr;
+			}
 		}
-
-		if (index == stratagems.size())
-			break;
-		
+		else
+		{
+			gameScene->Input();
+			gameScene->Update();
+			gameScene->Draw();
+		}
+	
 		EndDrawing();
-	}
-
-	for (auto& stratagem : stratagems)
-	{
-		stratagem.UnloadResources();
 	}
 
 	return 0;
