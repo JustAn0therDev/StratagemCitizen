@@ -14,9 +14,10 @@ private:
 public:
 	GameScene(std::vector<Stratagem> p_Stratagems);
 	void SetStratagemVector(std::vector<Stratagem> p_Stratagems);
-	virtual void Input();
-	virtual void Update();
-	virtual void Draw();
+	void Input();
+	void Update();
+	void Draw();
+	bool GetShouldEndScene() const;
 	~GameScene();
 };
 

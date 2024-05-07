@@ -25,6 +25,7 @@ void GameScene::Update()
 	if (m_Stratagems[m_Index].GetFinished())
 	{
 		m_Index++;
+		m_RoundTimer.AddTime();
 	}
 
 	m_RoundTimer.Update();
@@ -43,6 +44,11 @@ void GameScene::Draw()
 
 	m_Stratagems[m_Index].Draw();
 	m_RoundTimer.Draw();
+}
+
+bool GameScene::GetShouldEndScene() const
+{
+	return true;
 }
 
 GameScene::~GameScene()

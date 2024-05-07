@@ -49,3 +49,8 @@ const bool RoundTimer::GetIsTimeUp() const
 {
 	return m_IsTimeUp;
 }
+
+const void RoundTimer::AddTime()
+{
+	m_UpdateRectangleWidth += 70;
+}

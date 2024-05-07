@@ -1,11 +1,10 @@
 #pragma once
 class Scene
 {
-private:
-
 public:
-	void Input();
-	void Update();
-	void Draw();
+	virtual void Input() = 0;
+	virtual void Update() = 0;
+	virtual void Draw() = 0;
+	virtual bool GetShouldEndScene() const = 0;
 };
 
