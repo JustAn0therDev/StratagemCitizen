@@ -4,10 +4,10 @@
 Stratagem::Stratagem(const char* p_Name, std::vector<Arrow> p_Arrows, const char* p_ImageFileName) : m_ImagePosition({ 200, 100 }), m_Finished(false), m_Index(0)
 {
 	LoadStratagemImageTexture(p_ImageFileName);
-	this->m_Arrows = p_Arrows;
-	this->m_Name = p_Name;
+	m_Arrows = p_Arrows;
+	m_Name = p_Name;
 
-	this->CalculateArrowPositions();
+	CalculateArrowPositions();
 }
 
 void Stratagem::LoadStratagemImageTexture(const char* p_ImageFileName)
@@ -15,7 +15,7 @@ void Stratagem::LoadStratagemImageTexture(const char* p_ImageFileName)
 	// TODO(Ruan): For now, I'll resize the images that are too big.
 	// In an ideal scenario, the images would always have the same size.
 	// This method still contains an inherit problem, that being images that are
-	// smaller than the limit.
+	// smaller than the limit will stay small (I think it's better than resizing a smaller image into a bigger one).
 	Image image = LoadImage(p_ImageFileName);
 
 	if (image.height > STRATAGEM_IMAGE_HEIGHT_LIMIT && image.width > STRATAGEM_IMAGE_WIDTH_LIMIT)
@@ -74,7 +74,7 @@ void Stratagem::UnloadResources()
 
 void Stratagem::CalculateArrowPositions()
 {
-	// FIXME: calculate this better :)
+	// FIXME(Ruan): calculate this better :)
 	m_HalfOfArrowImageWidth = static_cast<float>(ARROW_IMAGE_WIDTH) / 2;
 	m_ArrowImageOffset = ARROW_IMAGE_WIDTH + m_HalfOfArrowImageWidth;
 	m_InitialPosX = ((static_cast<float>(WINDOW_WIDTH) / 2) - m_HalfOfArrowImageWidth) - m_HalfOfArrowImageWidth * m_Arrows.size();

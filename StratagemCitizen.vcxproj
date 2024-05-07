@@ -136,6 +136,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Stratagem.cpp" />
     <ClCompile Include="StratagemConfigParser.cpp" />
+    <ClCompile Include="RoundTimer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Stratagem.h" />
     <ClInclude Include="StratagemConfigParser.h" />
+    <ClInclude Include="RoundTimer.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
