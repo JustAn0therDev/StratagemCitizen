@@ -1,3 +1,6 @@
 Eagle 500 KG Bomb	UP,RIGHT,DOWN,DOWN,DOWN	eagle-500kg-bomb.png
 Quasar Cannon	DOWN,DOWN,UP,LEFT,RIGHT	quasar-cannon.png
 Orbital 380Mm He Barrage	RIGHT,DOWN,DOWN,UP,UP,LEFT,DOWN,DOWN,DOWN	orbital-380mm-he-barrage.png
+Eagle 110MM Rocket Pods	UP,RIGHT,UP,LEFT	Eagle_110MM_Rocket_Pods_Icon.png
+Hellbomb	DOWN,UP,LEFT,DOWN,UP,RIGHT,DOWN,UP	Hellbomb.png
+Resupply	DOWN,DOWN,UP,RIGHT	Resupply.png

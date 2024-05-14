@@ -19,10 +19,8 @@ void Stratagem::LoadStratagemImageTexture(const char* p_ImageFileName)
 	// smaller than the limit will stay small (I think it's better than resizing a smaller image into a bigger one).
 	Image image = LoadImage(p_ImageFileName);
 
-	if (image.height > STRATAGEM_IMAGE_HEIGHT_LIMIT && image.width > STRATAGEM_IMAGE_WIDTH_LIMIT)
-	{
-		ImageResize(&image, STRATAGEM_IMAGE_WIDTH_LIMIT, STRATAGEM_IMAGE_HEIGHT_LIMIT);
-	}
+	// Images are always resized, since I don't have control over the assets
+	ImageResize(&image, STRATAGEM_IMAGE_WIDTH_LIMIT, STRATAGEM_IMAGE_HEIGHT_LIMIT);
 
 	this->m_Texture = LoadTextureFromImage(image);
 	UnloadImage(image);

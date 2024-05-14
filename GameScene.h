@@ -10,7 +10,8 @@ class GameScene : public virtual Scene
 private:
 	std::vector<Stratagem> m_Stratagems;
 	int m_Index;
-	int m_FinalPoints;
+	int m_TotalPoints;
+	int m_PointsFontSize = 60;
 	Round m_CurrentRound;
 	int m_RoundNumber;
 	const int m_FontSize = 60;

@@ -4,7 +4,7 @@
 #include <raylib.h>
 #include "Round.h"
 
-GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : m_Index(0), m_FinalPoints(0), m_RoundNumber(1)
+GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : m_Index(0), m_TotalPoints(0), m_RoundNumber(1)
 {
 	m_Stratagems = p_Stratagems;
 	m_CurrentRound.SetRandomStratagemsFromStratagemVector(p_Stratagems);
@@ -26,6 +26,7 @@ void GameScene::Update()
 
 	if (m_CurrentRound.GetFinished())
 	{
+		m_TotalPoints += m_CurrentRound.GetPoints();
 		m_CurrentRound = Round();
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
 		m_RoundNumber++;
@@ -43,9 +44,19 @@ void GameScene::Draw()
 	m_CurrentRound.Draw();
 
 	// TODO: The font size (60) should be separated as a constant value
-	char buffer[10] = { 0 };
-	sprintf_s(buffer, "%i", m_RoundNumber);
-	DrawText(buffer, WINDOW_WIDTH - m_FontSize, 0, m_FontSize, YELLOW);
+	char buffer[30] = { 0 };
+	sprintf_s(buffer, "Round: %i", m_RoundNumber);
+	int textSizeWithSpacingX = MeasureText(buffer, m_FontSize) + 20;
+
+	DrawText(buffer, WINDOW_WIDTH - textSizeWithSpacingX, 0, m_FontSize, YELLOW);
+
+	memset(buffer, 0, 30);
+
+	// TODO: This is bad code. Refactor this when possible, it might get tricky to work with.
+	int totalPointsPlusRound = m_TotalPoints + m_CurrentRound.GetPoints();
+
+	sprintf_s(buffer, "%i", totalPointsPlusRound);
+	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 5), WINDOW_HEIGHT / 4, m_PointsFontSize, YELLOW);
 }
 
 bool GameScene::GetShouldEndScene() const

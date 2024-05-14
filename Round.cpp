@@ -26,9 +26,11 @@ void Round::Update()
 
 	if (m_RandomStratagems[m_StratagemIndex].GetFinished())
 	{
+		// TODO: The perfect bonus should be applied to the whole round, not to a single stratagem
 		int perfectBonus = m_RandomStratagems[m_StratagemIndex].GetMissedAnArrow() ? 0 : m_PerfectBonus;
 		m_Points += 20 + perfectBonus;
 		m_StratagemIndex++;
+		// TODO: Add timer bonus
 		m_RoundTimer.AddTime();
 	}
 
@@ -42,10 +44,6 @@ void Round::Update()
 
 void Round::Draw()
 {
-	char buffer[10] = {0};
-	sprintf_s(buffer, "%i", m_Points);
-
-	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 3.5f), WINDOW_HEIGHT / 3, m_PointsFontSize, YELLOW);
 
 	for (size_t i = 0; i < m_RandomStratagems.size(); i++)
 	{
@@ -55,14 +53,13 @@ void Round::Draw()
 			continue;
 		}
 
-		int distanceMultiplier = (i + 1 - m_StratagemIndex);
+		size_t distanceMultiplier = (i + 1 - m_StratagemIndex);
 		
-		if (m_StratagemIndex < i && distanceMultiplier < 6)
+		if (m_StratagemIndex < i && distanceMultiplier < m_StratagemIconAmountLimit)
 		{
-			// TODO: Draw only the stratagem icon
 			Vector2 imagePosition = m_RandomStratagems[i].GetImagePosition();
-			imagePosition.x += m_DefaultIconSpacing * distanceMultiplier;
-			imagePosition.y += m_DefaultIconSpacing;
+			imagePosition.x += m_DefaultIconSpacingX * distanceMultiplier;
+			imagePosition.y += m_DefaultIconSpacingY;
 			const Texture2D imageTexture = m_RandomStratagems[i].GetTexture();
 			DrawTextureEx(imageTexture, imagePosition, 0, 0.3f, WHITE);
 		}
@@ -74,4 +71,9 @@ void Round::Draw()
 bool Round::GetFinished() const
 {
 	return m_Finished;
+}
+
+const int Round::GetPoints() const
+{
+	return m_Points;
 }
