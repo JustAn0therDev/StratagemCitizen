@@ -45,7 +45,7 @@ void Round::Draw()
 	char buffer[10] = {0};
 	sprintf_s(buffer, "%i", m_Points);
 
-	DrawText(buffer, WINDOW_WIDTH - (WINDOW_WIDTH / 3.5f), WINDOW_HEIGHT / 3, m_PointsFontSize, YELLOW);
+	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 3.5f), WINDOW_HEIGHT / 3, m_PointsFontSize, YELLOW);
 
 	for (size_t i = 0; i < m_RandomStratagems.size(); i++)
 	{
@@ -54,8 +54,18 @@ void Round::Draw()
 			m_RandomStratagems[i].Draw();
 			continue;
 		}
+
+		int distanceMultiplier = (i + 1 - m_StratagemIndex);
 		
-		// TODO: Draw only the stratagem icon
+		if (m_StratagemIndex < i && distanceMultiplier < 6)
+		{
+			// TODO: Draw only the stratagem icon
+			Vector2 imagePosition = m_RandomStratagems[i].GetImagePosition();
+			imagePosition.x += m_DefaultIconSpacing * distanceMultiplier;
+			imagePosition.y += m_DefaultIconSpacing;
+			const Texture2D imageTexture = m_RandomStratagems[i].GetTexture();
+			DrawTextureEx(imageTexture, imagePosition, 0, 0.3f, WHITE);
+		}
 	}
 
 	m_RoundTimer.Draw();

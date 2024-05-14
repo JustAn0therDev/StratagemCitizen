@@ -4,14 +4,12 @@
 #include <chrono>
 #include <raymath.h>
 
-// TODO(Ruan): Each successful completed stratagem results in a time bonus. This should be implemented in the future.
-
 RoundTimer::RoundTimer() : m_UpdateRectangleWidth(400), m_DrawRectangleWidth(400), m_RectangleHeight(25), m_IsTimeUp(false)
 {
 	const int halfWindowWidth = WINDOW_WIDTH / 2;
 	const int halfWindowHeight = WINDOW_HEIGHT / 2;
 	m_InitialPosX = halfWindowWidth - 200;
-	m_InitialPosY = halfWindowHeight + 100;
+	m_InitialPosY = halfWindowHeight + 200;
 	m_LastTime = std::chrono::system_clock::now();
 }
 

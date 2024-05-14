@@ -10,6 +10,7 @@ private:
 	int m_StratagemIndex;
 	int m_PerfectBonus = 100;
 	int m_PointsFontSize = 60;
+	int m_DefaultIconSpacing = 100;
 	std::vector<Stratagem> m_RandomStratagems;
 	RoundTimer m_RoundTimer;
 	bool m_Finished;

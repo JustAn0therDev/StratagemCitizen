@@ -10,7 +10,8 @@ private:
 	Vector2 m_ImagePosition;
 	Texture2D m_Texture;
 	std::vector<Arrow> m_Arrows; // TODO: Maybe make pointers out of it?
-	const char* m_Name;
+	std::string m_Name;
+	int m_FontSize = 40;
 	bool m_Finished;
 	int m_Index;
 	float m_HalfOfArrowImageWidth;
@@ -29,5 +30,7 @@ public:
 	void UnloadResources();
 	void CalculateArrowPositions();
 	bool GetMissedAnArrow() const;
+	const Vector2 GetImagePosition() const;
+	const Texture2D GetTexture() const;
 };
 
