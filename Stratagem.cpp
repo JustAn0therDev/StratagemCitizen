@@ -1,7 +1,7 @@
 #include "Stratagem.h"
 #include "Constants.h"
 
-Stratagem::Stratagem(const char* p_Name, std::vector<Arrow> p_Arrows, const char* p_ImageFileName) : m_ImagePosition({ 200, 100 }), m_Finished(false), m_Index(0)
+Stratagem::Stratagem(const char* p_Name, std::vector<Arrow> p_Arrows, const char* p_ImageFileName) : m_ImagePosition({ 200, 100 }), m_Finished(false), m_Index(0), m_MissedAnArrow(false)
 {
 	LoadStratagemImageTexture(p_ImageFileName);
 	m_Arrows = p_Arrows;
@@ -40,6 +40,10 @@ void Stratagem::Input()
 	if (pressedCorrectButton)
 	{
 		m_Index++;
+	}
+	else if (m_Arrows[m_Index].GetMissed())
+	{
+		m_MissedAnArrow = true;
 	}
 }
 
@@ -84,4 +88,9 @@ void Stratagem::CalculateArrowPositions()
 	{
 		m_Arrows[i].SetPos({ m_InitialPosX + m_ArrowImageOffset * i, m_InitialPosY });
 	}
+}
+
+bool Stratagem::GetMissedAnArrow() const
+{
+	return m_MissedAnArrow;
 }

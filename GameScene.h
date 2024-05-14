@@ -3,14 +3,16 @@
 #include <vector>
 #include "Stratagem.h"
 #include "RoundTimer.h"
+#include "Round.h"
 
 class GameScene : public virtual Scene
 {
 private:
 	std::vector<Stratagem> m_Stratagems;
 	int m_Index;
-	RoundTimer m_RoundTimer;
-
+	int m_FinalPoints;
+	Round m_CurrentRound;
+	int m_RoundNumber;
 public:
 	GameScene(std::vector<Stratagem> p_Stratagems);
 	void SetStratagemVector(std::vector<Stratagem> p_Stratagems);

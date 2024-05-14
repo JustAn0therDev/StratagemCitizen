@@ -12,6 +12,7 @@ private:
 	Vector2 m_Pos;
 	bool m_PressedCorrectButton = false;
 	bool m_PressedWrongButton = false;
+	bool m_Missed = false;
 	Color m_Color;
 	Texture2D m_Texture;
 
@@ -26,5 +27,6 @@ public:
 	void UnloadResources();
 	Vector2 GetPos() const;
 	void SetPos(Vector2 pos);
+	bool GetMissed() const;
 };
 

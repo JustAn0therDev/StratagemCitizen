@@ -8,7 +8,7 @@ Arrow::Arrow(const char* p_ImageFileName, KeyboardKey p_KeyboardKey) : m_Pressed
 	Image image = LoadImage(p_ImageFileName);
 	this->m_Texture = LoadTextureFromImage(image);
 	UnloadImage(image);
-	
+
 	this->m_Color = WHITE;
 	this->m_KeyboardKey = p_KeyboardKey;
 }
@@ -39,6 +39,7 @@ bool Arrow::Input()
 	else if (KeyPressedWasAnArrowKey())
 	{
 		m_PressedWrongButton = true;
+		m_Missed = true;
 	}
 
 	return m_PressedCorrectButton;
@@ -92,4 +93,9 @@ Vector2 Arrow::GetPos() const
 void Arrow::SetPos(Vector2 pos)
 {
 	m_Pos = pos;
+}
+
+bool Arrow::GetMissed() const
+{
+	return m_Missed;
 }

@@ -14,6 +14,5 @@ public:
 	StratagemConfigParser(const char* p_FilePath);
 	void ParseStratagems();
 	std::vector<Stratagem> GetStratagems() const;
-	
 };
 

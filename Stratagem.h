@@ -17,6 +17,7 @@ private:
 	float m_ArrowImageOffset;
 	float m_InitialPosX;
 	float m_InitialPosY;
+	bool m_MissedAnArrow;
 
 public:
 	Stratagem(const char* p_Name, std::vector<Arrow> p_Arrows, const char* p_ImageFileName);
@@ -27,5 +28,6 @@ public:
 	bool GetFinished() const;
 	void UnloadResources();
 	void CalculateArrowPositions();
+	bool GetMissedAnArrow() const;
 };
 
