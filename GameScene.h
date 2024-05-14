@@ -13,6 +13,7 @@ private:
 	int m_FinalPoints;
 	Round m_CurrentRound;
 	int m_RoundNumber;
+	const int m_FontSize = 60;
 public:
 	GameScene(std::vector<Stratagem> p_Stratagems);
 	void SetStratagemVector(std::vector<Stratagem> p_Stratagems);

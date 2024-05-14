@@ -45,7 +45,7 @@ void GameScene::Draw()
 	// TODO: The font size (60) should be separated as a constant value
 	char buffer[10] = { 0 };
 	sprintf_s(buffer, "%i", m_RoundNumber);
-	DrawText(buffer, WINDOW_WIDTH - 60, 0, 60, YELLOW);
+	DrawText(buffer, WINDOW_WIDTH - m_FontSize, 0, m_FontSize, YELLOW);
 }
 
 bool GameScene::GetShouldEndScene() const
