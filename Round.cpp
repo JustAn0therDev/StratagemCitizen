@@ -44,7 +44,6 @@ void Round::Update()
 
 void Round::Draw()
 {
-
 	for (size_t i = 0; i < m_RandomStratagems.size(); i++)
 	{
 		if (m_StratagemIndex == i)
@@ -61,7 +60,7 @@ void Round::Draw()
 			imagePosition.x += m_DefaultIconSpacingX * distanceMultiplier;
 			imagePosition.y += m_DefaultIconSpacingY;
 			const Texture2D imageTexture = m_RandomStratagems[i].GetTexture();
-			DrawTextureEx(imageTexture, imagePosition, 0, 0.3f, WHITE);
+			DrawTextureEx(imageTexture, imagePosition, 0, 0.2f, WHITE);
 		}
 	}
 
