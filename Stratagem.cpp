@@ -13,13 +13,10 @@ Stratagem::Stratagem(const char* p_Name, std::vector<Arrow> p_Arrows, const char
 
 void Stratagem::LoadStratagemImageTexture(const char* p_ImageFileName)
 {
-	// TODO(Ruan): For now, I'll resize the images that are too big.
-	// In an ideal scenario, the images would always have the same size.
-	// This method still contains an inherit problem, that being images that are
-	// smaller than the limit will stay small (I think it's better than resizing a smaller image into a bigger one).
 	Image image = LoadImage(p_ImageFileName);
 
-	// Images are always resized, since I don't have control over the assets
+	// Images are always resized since I don't have control over the assets.
+	// In an ideal scenario, the assets would all be the same size
 	ImageResize(&image, STRATAGEM_IMAGE_WIDTH_LIMIT, STRATAGEM_IMAGE_HEIGHT_LIMIT);
 
 	this->m_Texture = LoadTextureFromImage(image);
