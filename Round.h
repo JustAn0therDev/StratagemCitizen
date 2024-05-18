@@ -15,6 +15,7 @@ private:
 	std::vector<Stratagem> m_RandomStratagems;
 	RoundTimer m_RoundTimer;
 	bool m_Finished;
+	bool m_WasRoundPerfect;
 public:
 	Round();
 	void SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems);
@@ -23,5 +24,6 @@ public:
 	void Draw();
 	bool GetFinished() const;
 	const int GetPoints() const;
+	const int GetFinalPoints() const;
 };
 

@@ -5,13 +5,18 @@
 #include <string>
 #include "RoundTimer.h"
 #include "Constants.h"
+#include <time.h>
 
 Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false) { }
 
 void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems)
 {
-	// TODO: get random amount of stratagems in a random order
-	m_RandomStratagems = p_Stratagems;
+	srand(time(NULL));
+	while (m_RandomStratagems.size() < STRATAGEM_AMOUNT_LIMIT) // For now, the amount of stratagems is not random
+	{
+		int random_index = rand() / ((RAND_MAX + 1u) / p_Stratagems.size());
+		m_RandomStratagems.push_back(p_Stratagems[random_index]);
+	}
 }
 
 void Round::Input()
@@ -26,9 +31,12 @@ void Round::Update()
 
 	if (m_RandomStratagems[m_StratagemIndex].GetFinished())
 	{
-		// TODO: The perfect bonus should be applied to the whole round and not to a single stratagem
-		int perfectBonus = m_RandomStratagems[m_StratagemIndex].GetMissedAnArrow() ? 0 : m_PerfectBonus;
-		m_Points += 20 + perfectBonus;
+		if (m_RandomStratagems[m_StratagemIndex].GetMissedAnArrow())
+		{
+			m_WasRoundPerfect = false;
+		}
+
+		m_Points += 20;
 		m_StratagemIndex++;
 		// TODO: Add timer bonus
 		m_RoundTimer.AddTime();
@@ -75,4 +83,9 @@ bool Round::GetFinished() const
 const int Round::GetPoints() const
 {
 	return m_Points;
+}
+
+const int Round::GetFinalPoints() const
+{
+	return m_Points + (m_WasRoundPerfect ? m_PerfectBonus : 0);
 }

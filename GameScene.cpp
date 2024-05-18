@@ -26,10 +26,12 @@ void GameScene::Update()
 
 	if (m_CurrentRound.GetFinished())
 	{
-		m_TotalPoints += m_CurrentRound.GetPoints();
+		m_TotalPoints += m_CurrentRound.GetFinalPoints();
 		m_CurrentRound = Round();
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
-		m_RoundNumber++;
+		// TODO: this should be moved when drawing the final data of the round and 
+		// incremented only when the data of the round is shown.
+		m_RoundNumber++; 
 	}
 }
 
@@ -43,7 +45,6 @@ void GameScene::Draw()
 
 	m_CurrentRound.Draw();
 
-	// TODO: The font size (60) should be separated as a constant value
 	char buffer[30] = { 0 };
 	sprintf_s(buffer, "Round: %i", m_RoundNumber);
 	int textSizeWithSpacingX = MeasureText(buffer, m_FontSize) + 20;
@@ -57,6 +58,8 @@ void GameScene::Draw()
 
 	sprintf_s(buffer, "%i", totalPointsPlusRound);
 	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 5), WINDOW_HEIGHT / 4, m_PointsFontSize, YELLOW);
+
+	// TODO: Draw the points if the round has finished.
 }
 
 bool GameScene::GetShouldEndScene() const
