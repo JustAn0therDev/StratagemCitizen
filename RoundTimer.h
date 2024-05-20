@@ -19,5 +19,6 @@ public:
 	const bool GetIsTimeUp() const;
 	// This method adds a few pixels to the rectangle that represents the total time.
 	const void AddTime();
+	const int GetRoundTimerBonus() const;
 };
 

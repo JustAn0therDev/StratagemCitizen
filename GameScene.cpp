@@ -26,7 +26,7 @@ void GameScene::Update()
 
 	if (m_CurrentRound.GetFinished())
 	{
-		m_TotalPoints += m_CurrentRound.GetFinalPoints();
+		m_TotalPoints += m_CurrentRound.GetFinalPoints() + m_CurrentRound.GetRoundTimer()->GetRoundTimerBonus();
 		m_CurrentRound = Round();
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
 		// TODO: this should be moved when drawing the final data of the round and 

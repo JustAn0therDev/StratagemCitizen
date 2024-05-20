@@ -7,14 +7,14 @@
 #include "Constants.h"
 #include <time.h>
 
-Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false) { }
+Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false), m_WasRoundPerfect(true) { }
 
 void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems)
 {
-	srand(time(NULL));
+	srand(static_cast<unsigned int>(time(NULL)));
 	while (m_RandomStratagems.size() < STRATAGEM_AMOUNT_LIMIT) // For now, the amount of stratagems is not random
 	{
-		int random_index = rand() / ((RAND_MAX + 1u) / p_Stratagems.size());
+		int random_index = static_cast<int>(rand() / ((RAND_MAX + 1u) / p_Stratagems.size()));
 		m_RandomStratagems.push_back(p_Stratagems[random_index]);
 	}
 }
@@ -38,7 +38,6 @@ void Round::Update()
 
 		m_Points += 20;
 		m_StratagemIndex++;
-		// TODO: Add timer bonus
 		m_RoundTimer.AddTime();
 	}
 
@@ -83,6 +82,11 @@ bool Round::GetFinished() const
 const int Round::GetPoints() const
 {
 	return m_Points;
+}
+
+const RoundTimer* Round::GetRoundTimer() const
+{
+	return &m_RoundTimer;
 }
 
 const int Round::GetFinalPoints() const
