@@ -55,5 +55,5 @@ const void RoundTimer::AddTime()
 
 const int RoundTimer::GetRoundTimerBonus() const
 {
-	return (m_UpdateRectangleWidth - (m_UpdateRectangleWidth - m_InitialPosX)) * 0.2;
+	return m_UpdateRectangleWidth * 0.1;
 }
