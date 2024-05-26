@@ -24,6 +24,7 @@ public:
 	void Draw();
 	bool GetFinished() const;
 	const int GetPoints() const;
+	const int GetPerfectBonus() const;
 	const int GetFinalPoints() const;
 	const RoundTimer* GetRoundTimer() const;
 };

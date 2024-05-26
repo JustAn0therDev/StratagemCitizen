@@ -21,24 +21,31 @@ void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stra
 
 void Round::Input()
 {
-	m_RandomStratagems[m_StratagemIndex].Input();
+	if (m_StratagemIndex < m_RandomStratagems.size())
+	{
+		m_RandomStratagems[m_StratagemIndex].Input();
+	}
+	
 	m_RoundTimer.Input();
 }
 
 void Round::Update()
 {
-	m_RandomStratagems[m_StratagemIndex].Update();
-
-	if (m_RandomStratagems[m_StratagemIndex].GetFinished())
+	if (m_StratagemIndex < m_RandomStratagems.size())
 	{
-		if (m_RandomStratagems[m_StratagemIndex].GetMissedAnArrow())
-		{
-			m_WasRoundPerfect = false;
-		}
+		m_RandomStratagems[m_StratagemIndex].Update();
 
-		m_Points += 20;
-		m_StratagemIndex++;
-		m_RoundTimer.AddTime();
+		if (m_RandomStratagems[m_StratagemIndex].GetFinished())
+		{
+			if (m_RandomStratagems[m_StratagemIndex].GetMissedAnArrow())
+			{
+				m_WasRoundPerfect = false;
+			}
+
+			m_Points += POINTS_PER_STRATAGEM;
+			m_StratagemIndex++;
+			m_RoundTimer.AddTime();
+		}
 	}
 
 	if (m_StratagemIndex == m_RandomStratagems.size() || m_RoundTimer.GetIsTimeUp())
@@ -89,7 +96,12 @@ const RoundTimer* Round::GetRoundTimer() const
 	return &m_RoundTimer;
 }
 
+const int Round::GetPerfectBonus() const
+{
+	return m_WasRoundPerfect ? m_PerfectBonus : 0;
+}
+
 const int Round::GetFinalPoints() const
 {
-	return m_Points + (m_WasRoundPerfect ? m_PerfectBonus : 0);
+	return m_Points + GetPerfectBonus() + m_RoundTimer.GetRoundTimerBonus();
 }
