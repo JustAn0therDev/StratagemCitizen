@@ -21,6 +21,13 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	DrawText("STRATAGEM CITIZEN", WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, 20, WHITE);
-	DrawText("> Press enter to start <", WINDOW_WIDTH / 2, (WINDOW_HEIGHT + 80) / 2, 16, WHITE);
+	const int halfWindowWidth = WINDOW_WIDTH / 2;
+	const int halfWindowHeight = WINDOW_HEIGHT / 2;
+
+	int stratagemCitizenTitleSizeX = MeasureText("STRATAGEM CITIZEN", m_FontSize);
+	int pressEnterToStartSizeX = MeasureText("> Press enter to start <", m_FontSize - 20);
+
+	DrawText("STRATAGEM CITIZEN", WINDOW_WIDTH / 2 - (stratagemCitizenTitleSizeX / 2), halfWindowHeight - static_cast<int>(m_FontSize / 2), m_FontSize, WHITE);
+
+	DrawText("> Press enter to start <", WINDOW_WIDTH / 2 - (pressEnterToStartSizeX / 2), (halfWindowHeight + 80) - static_cast<int>((m_SubtitleFontSize) / 2), m_SubtitleFontSize, WHITE);
 }

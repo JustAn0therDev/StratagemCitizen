@@ -4,7 +4,7 @@
 #include <raylib.h>
 #include "Round.h"
 
-GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : m_Index(0), m_TotalPoints(0), m_RoundNumber(1), m_RoundHasFinished(false), m_ElapsedSeconds(0)
+GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : m_Index(0), m_TotalPoints(0), m_RoundNumber(1), m_ElapsedSeconds(0)
 {
 	m_Stratagems = p_Stratagems;
 	m_CurrentRound.SetRandomStratagemsFromStratagemVector(p_Stratagems);
@@ -38,7 +38,8 @@ void GameScene::Update()
 		m_CurrentRound = Round();
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
 		m_RoundNumber++;
-		m_RoundHasFinished = false;
+		// The difference between the currentTime and itself is 0, so we reset the elapsed seconds counter.
+		m_ElapsedSeconds = currentTime - currentTime;
 	}
 	else
 	{
@@ -77,7 +78,6 @@ void GameScene::Draw()
 	}
 	else
 	{
-		m_RoundHasFinished = true;
 		RunRoundEndAnimation();
 	}
 }
