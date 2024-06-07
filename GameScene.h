@@ -20,7 +20,7 @@ private:
 	std::chrono::duration<double> m_ElapsedSeconds;
 	const double m_EndRoundTimeLimitInSeconds = 5;
 
-	void DrawRoundPointsText(const char* text, const int points, const int pointsPositionY);
+	void DrawRoundPointsText(const char* text, const int points, const int pointsPositionY) const;
 public:
 	GameScene(std::vector<Stratagem> p_Stratagems);
 	void SetStratagemVector(std::vector<Stratagem> p_Stratagems);

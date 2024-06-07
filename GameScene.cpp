@@ -128,10 +128,10 @@ void GameScene::RunRoundEndAnimation()
 	}
 }
 
-void GameScene::DrawRoundPointsText(const char* text, const int points, const int pointsPositionYOffset)
+void GameScene::DrawRoundPointsText(const char* text, const int points, const int pointsPositionYOffset) const
 {
-	const int sixthWindowWidth = static_cast<int>(WINDOW_WIDTH / 6);
-	const int quarterWindowHeight = static_cast<int>(WINDOW_HEIGHT / 4);
+	constexpr int sixthWindowWidth = static_cast<int>(WINDOW_WIDTH / 6);
+	constexpr int quarterWindowHeight = static_cast<int>(WINDOW_HEIGHT / 4);
 	const int pointsPositionX = sixthWindowWidth * 4;
 	const int initialPointsLocationY = quarterWindowHeight - static_cast<int>(m_FontSize / 2);
 
