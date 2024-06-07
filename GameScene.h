@@ -19,6 +19,8 @@ private:
 	std::chrono::system_clock::time_point m_LastTime;
 	std::chrono::duration<double> m_ElapsedSeconds;
 	const double m_EndRoundTimeLimitInSeconds = 5;
+
+	void DrawRoundPointsText(const char* text, const int points, const int pointsPositionY);
 public:
 	GameScene(std::vector<Stratagem> p_Stratagems);
 	void SetStratagemVector(std::vector<Stratagem> p_Stratagems);

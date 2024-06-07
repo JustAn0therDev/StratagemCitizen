@@ -97,59 +97,50 @@ GameScene::~GameScene()
 
 void GameScene::RunRoundEndAnimation()
 {
-	// TODO: Needs urgent refactoring.
-	const int sixthWindowWidth = static_cast<int>(WINDOW_WIDTH / 6);
-	const int quarterWindowHeight = static_cast<int>(WINDOW_HEIGHT / 4);
-
-	const int pointsLocationX = sixthWindowWidth * 4;
-	const int pointsLocationY = quarterWindowHeight - static_cast<int>(m_FontSize / 2);
+	const int initialTextYOffset = 75;
 
 	if (m_ElapsedSeconds.count() < 3.5)
 	{
-		DrawText("Round Bonus", sixthWindowWidth, pointsLocationY, m_FontSize, YELLOW);
 		int roundPoints = POINTS_PER_STRATAGEM * STRATAGEM_AMOUNT_LIMIT;
-		char roundPointsBuffer[7] = { 0 };
-
-		_itoa_s(roundPoints, roundPointsBuffer, 10);
-
-		DrawText(roundPointsBuffer, sixthWindowWidth * 4, pointsLocationY, m_FontSize, YELLOW);
+		DrawRoundPointsText("Round Bonus", roundPoints, 0);
 
 		if (m_ElapsedSeconds.count() > 0.7)
 		{
-			DrawText("Time Bonus", sixthWindowWidth, pointsLocationY + 75, m_FontSize, YELLOW);
 			int timeBonus = m_CurrentRound.GetRoundTimer()->GetRoundTimerBonus();
-			char timeBonusBuffer[7] = { 0 };
-
-			_itoa_s(timeBonus, timeBonusBuffer, 10);
-
-			DrawText(timeBonusBuffer, sixthWindowWidth * 4, pointsLocationY + 75, m_FontSize, YELLOW);
+			DrawRoundPointsText("Time Bonus", timeBonus, initialTextYOffset);
 		}
 
 		if (m_ElapsedSeconds.count() > 1.4)
 		{
-			DrawText("Perfect Bonus", sixthWindowWidth, pointsLocationY + 140, m_FontSize, YELLOW);
 			int perfectBonus = m_CurrentRound.GetPerfectBonus();
-			char perfectBonusBuffer[7] = { 0 };
-
-			_itoa_s(perfectBonus, perfectBonusBuffer, 10);
-
-			DrawText(perfectBonusBuffer, sixthWindowWidth * 4, pointsLocationY + 140, m_FontSize, YELLOW);
+			DrawRoundPointsText("Perfect Bonus", perfectBonus, initialTextYOffset * 2);
 		}
 
 		if (m_ElapsedSeconds.count() > 2.1)
 		{
-			DrawText("Total Score", sixthWindowWidth, pointsLocationY + 210, m_FontSize, YELLOW);
-			char totalScoreBuffer[7] = { 0 };
-
-			_itoa_s(m_CurrentRound.GetFinalPoints(), totalScoreBuffer, 10);
-
-			DrawText(totalScoreBuffer, sixthWindowWidth * 4, pointsLocationY + 210, m_FontSize, YELLOW);
+			const int totalScore = m_CurrentRound.GetFinalPoints();
+			DrawRoundPointsText("Total Score", totalScore, initialTextYOffset * 3);
 		}
 	}
 	else
 	{
 		RunGetReadyAnimation();
 	}
+}
+
+void GameScene::DrawRoundPointsText(const char* text, const int points, const int pointsPositionYOffset)
+{
+	const int sixthWindowWidth = static_cast<int>(WINDOW_WIDTH / 6);
+	const int quarterWindowHeight = static_cast<int>(WINDOW_HEIGHT / 4);
+	const int pointsPositionX = sixthWindowWidth * 4;
+	const int initialPointsLocationY = quarterWindowHeight - static_cast<int>(m_FontSize / 2);
+
+	DrawText(text, sixthWindowWidth, initialPointsLocationY + pointsPositionYOffset, m_FontSize, YELLOW);
+	
+	char textWithPointsBuffer[7] = { 0 };
+	_itoa_s(points, textWithPointsBuffer, 10);
+
+	DrawText(textWithPointsBuffer, pointsPositionX, initialPointsLocationY + pointsPositionYOffset, m_FontSize, YELLOW);
 }
 
 void GameScene::RunGetReadyAnimation()
