@@ -91,6 +91,11 @@ const int Round::GetPoints() const
 	return m_Points;
 }
 
+const int Round::GetTotalPoints() const
+{
+	return m_Points + GetPerfectBonus() + m_RoundTimer.GetRoundTimerBonus();
+}
+
 const RoundTimer* Round::GetRoundTimer() const
 {
 	return &m_RoundTimer;
@@ -99,9 +104,4 @@ const RoundTimer* Round::GetRoundTimer() const
 const int Round::GetPerfectBonus() const
 {
 	return m_WasRoundPerfect ? m_PerfectBonus : 0;
-}
-
-const int Round::GetFinalPoints() const
-{
-	return m_Points + GetPerfectBonus() + m_RoundTimer.GetRoundTimerBonus();
 }

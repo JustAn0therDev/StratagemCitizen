@@ -27,6 +27,8 @@ public:
 	void Input();
 	void Update();
 	void Draw();
+	void DrawCurrentPoints();
+	void DrawCurrentRoundTextOnTopRightCorner();
 	bool GetShouldEndScene() const;
 	void RunRoundEndAnimation();
 	void RunGetReadyAnimation();

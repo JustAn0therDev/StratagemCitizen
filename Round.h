@@ -25,7 +25,7 @@ public:
 	bool GetFinished() const;
 	const int GetPoints() const;
 	const int GetPerfectBonus() const;
-	const int GetFinalPoints() const;
+	const int GetTotalPoints() const;
 	const RoundTimer* GetRoundTimer() const;
 };
 

@@ -34,10 +34,11 @@ void GameScene::Update()
 			return;
 		}
 
-		m_TotalPoints += m_CurrentRound.GetFinalPoints();
+		m_TotalPoints += m_CurrentRound.GetTotalPoints();
 		m_CurrentRound = Round();
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
 		m_RoundNumber++;
+
 		// The difference between the currentTime and itself is 0, so we reset the elapsed seconds counter.
 		m_ElapsedSeconds = currentTime - currentTime;
 	}
@@ -50,7 +51,7 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	// NOTES(Ruan): a VERY simple way to debug if things are, in fact, in the middle of the screen
 	DrawLine(WINDOW_WIDTH / 2, 0, WINDOW_WIDTH / 2, WINDOW_HEIGHT, GREEN);
 	DrawLine(0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2, GREEN);
@@ -59,27 +60,36 @@ void GameScene::Draw()
 	if (!m_CurrentRound.GetFinished())
 	{
 		m_CurrentRound.Draw();
-
-		char buffer[30] = { 0 };
-		sprintf_s(buffer, "Round: %i", m_RoundNumber);
-		int textSizeWithSpacingX = MeasureText(buffer, m_FontSize) + 20;
-
-		DrawText(buffer, WINDOW_WIDTH - textSizeWithSpacingX, 0, m_FontSize, YELLOW);
-		// Reset string buffer
-		memset(buffer, 0, 30);
-
-		// TODO: This is bad code. Refactor this when possible, it might get tricky to work with.
-		// This is because this method (GetPoints) does basically the same as the GetFinalPoints
-		// Both return a stateful property that could change anytime.
-		int totalPointsPlusRound = m_TotalPoints + m_CurrentRound.GetPoints();
-
-		sprintf_s(buffer, "%i", totalPointsPlusRound);
-		DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 5), WINDOW_HEIGHT / 4, m_PointsFontSize, YELLOW);
+		DrawCurrentRoundTextOnTopRightCorner();
+		DrawCurrentPoints();
 	}
 	else
 	{
 		RunRoundEndAnimation();
 	}
+}
+
+void GameScene::DrawCurrentRoundTextOnTopRightCorner()
+{
+	char buffer[30] = { 0 };
+
+	sprintf_s(buffer, "Round: %i", m_RoundNumber);
+	constexpr int xOffset = 20;
+	int textSizeWithSpacingX = MeasureText(buffer, m_FontSize) + xOffset;
+
+	DrawText(buffer, WINDOW_WIDTH - textSizeWithSpacingX, 0, m_FontSize, YELLOW);
+}
+
+void GameScene::DrawCurrentPoints()
+{
+	char buffer[30] = { 0 };
+
+	int totalPointsPlusRound = m_TotalPoints + m_CurrentRound.GetPoints();
+	constexpr int xOffset = static_cast<int>(WINDOW_WIDTH / 5);
+	constexpr int yOffset = WINDOW_HEIGHT / 4;
+
+	sprintf_s(buffer, "%i", totalPointsPlusRound);
+	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 5), WINDOW_HEIGHT / 4, m_PointsFontSize, YELLOW);
 }
 
 bool GameScene::GetShouldEndScene() const
@@ -118,7 +128,7 @@ void GameScene::RunRoundEndAnimation()
 
 		if (m_ElapsedSeconds.count() > 2.1)
 		{
-			const int totalScore = m_CurrentRound.GetFinalPoints();
+			const int totalScore = m_CurrentRound.GetTotalPoints();
 			DrawRoundPointsText("Total Score", totalScore, initialTextYOffset * 3);
 		}
 	}
