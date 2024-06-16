@@ -16,7 +16,6 @@ void TitleScene::Input()
 
 void TitleScene::Update()
 {
-	// NOTES(Ruan): Nothing for now
 }
 
 void TitleScene::Draw()

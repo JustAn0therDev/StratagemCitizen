@@ -39,8 +39,7 @@ void GameScene::Update()
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
 		m_RoundNumber++;
 
-		// The difference between the currentTime and itself is 0, so we reset the elapsed seconds counter.
-		m_ElapsedSeconds = currentTime - currentTime;
+		m_ElapsedSeconds = m_ElapsedSeconds.zero();
 	}
 	else
 	{
@@ -51,12 +50,6 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-#ifdef _DEBUG
-	// NOTES(Ruan): a VERY simple way to debug if things are, in fact, in the middle of the screen
-	DrawLine(WINDOW_WIDTH / 2, 0, WINDOW_WIDTH / 2, WINDOW_HEIGHT, GREEN);
-	DrawLine(0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT / 2, GREEN);
-#endif
-
 	if (!m_CurrentRound.GetFinished())
 	{
 		m_CurrentRound.Draw();

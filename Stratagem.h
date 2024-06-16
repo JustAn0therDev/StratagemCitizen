@@ -9,7 +9,7 @@ class Stratagem
 private:
 	Vector2 m_ImagePosition;
 	Texture2D m_Texture;
-	std::vector<Arrow> m_Arrows; // TODO: Maybe make pointers out of it?
+	std::vector<Arrow> m_Arrows;
 	std::string m_Name;
 	int m_FontSize = 40;
 	bool m_Finished;
