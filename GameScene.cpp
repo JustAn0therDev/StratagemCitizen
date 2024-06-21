@@ -4,6 +4,8 @@
 #include <raylib.h>
 #include "Round.h"
 
+// TODO:
+// Calculate the round, images and text relative to the window size, not with fixed values, like font sizes, for example.
 GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : m_Index(0), m_TotalPoints(0), m_RoundNumber(1), m_ElapsedSeconds(0)
 {
 	m_Stratagems = p_Stratagems;
