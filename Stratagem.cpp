@@ -83,10 +83,13 @@ void Stratagem::UnloadResources()
 
 void Stratagem::CalculateArrowPositions()
 {
-	// FIXME(Ruan): calculate this better :)
 	m_HalfOfArrowImageWidth = static_cast<float>(ARROW_IMAGE_WIDTH) / 2;
 	m_ArrowImageOffset = ARROW_IMAGE_WIDTH + m_HalfOfArrowImageWidth;
-	m_InitialPosX = ((static_cast<float>(WINDOW_WIDTH) / 2) - m_HalfOfArrowImageWidth) - m_HalfOfArrowImageWidth * m_Arrows.size();
+	
+	float arrowBlockSize = (m_ArrowImageOffset * m_Arrows.size()) - m_ArrowImageOffset;
+
+	m_InitialPosX = static_cast<float>(WINDOW_WIDTH / 2) - arrowBlockSize / 2;
+	
 	m_InitialPosY = DEFAULT_ARROW_HEIGHT - m_HalfOfArrowImageWidth;
 
 	for (size_t i = 0; i < m_Arrows.size(); i++)
