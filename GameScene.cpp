@@ -66,7 +66,7 @@ void GameScene::Draw(void)
 
 void GameScene::DrawCurrentRoundTextOnTopRightCorner()
 {
-	char buffer[30] = { 0 };
+	char buffer[30]{};
 
 	sprintf_s(buffer, "Round: %i", m_RoundNumber);
 	constexpr int xOffset = 20;
@@ -77,11 +77,11 @@ void GameScene::DrawCurrentRoundTextOnTopRightCorner()
 
 void GameScene::DrawCurrentPoints()
 {
-	char buffer[30] = { 0 };
+	char buffer[30]{};
 
 	int totalPointsPlusRound = m_TotalPoints + m_CurrentRound.GetPoints();
 	constexpr int xOffset = static_cast<int>(WINDOW_WIDTH / 5);
-	constexpr int yOffset = WINDOW_HEIGHT / 4;
+	constexpr int yOffset = static_cast<int>(WINDOW_HEIGHT / 4);
 
 	sprintf_s(buffer, "%i", totalPointsPlusRound);
 	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 5), WINDOW_HEIGHT / 4, m_PointsFontSize, YELLOW);
@@ -102,22 +102,21 @@ GameScene::~GameScene()
 
 void GameScene::RunRoundEndAnimation()
 {
-	const int initialTextYOffset = 75;
+	constexpr int initialTextYOffset = 75;
 
 	if (m_ElapsedSeconds.count() < 3.5)
 	{
-		int roundPoints = POINTS_PER_STRATAGEM * STRATAGEM_AMOUNT_LIMIT;
-		DrawRoundPointsText("Round Bonus", roundPoints, 0);
+		DrawRoundPointsText("Round Bonus", ROUND_POINTS, 0);
 
 		if (m_ElapsedSeconds.count() > 0.7)
 		{
-			int timeBonus = m_CurrentRound.GetRoundTimer()->GetRoundTimerBonus();
+			const int timeBonus = m_CurrentRound.GetRoundTimer()->GetRoundTimerBonus();
 			DrawRoundPointsText("Time Bonus", timeBonus, initialTextYOffset);
 		}
 
 		if (m_ElapsedSeconds.count() > 1.4)
 		{
-			int perfectBonus = m_CurrentRound.GetPerfectBonus();
+			const int perfectBonus = m_CurrentRound.GetPerfectBonus();
 			DrawRoundPointsText("Perfect Bonus", perfectBonus, initialTextYOffset * 2);
 		}
 
@@ -137,12 +136,12 @@ void GameScene::DrawRoundPointsText(const char* text, const int points, const in
 {
 	constexpr int sixthWindowWidth = static_cast<int>(WINDOW_WIDTH / 6);
 	constexpr int quarterWindowHeight = static_cast<int>(WINDOW_HEIGHT / 4);
-	const int pointsPositionX = sixthWindowWidth * 4;
+	constexpr int pointsPositionX = sixthWindowWidth * 4;
 	const int initialPointsLocationY = quarterWindowHeight - static_cast<int>(m_FontSize / 2);
 
 	DrawText(text, sixthWindowWidth, initialPointsLocationY + pointsPositionYOffset, m_FontSize, YELLOW);
 	
-	char textWithPointsBuffer[7] = { 0 };
+	char textWithPointsBuffer[7]{};
 	_itoa_s(points, textWithPointsBuffer, 10);
 
 	DrawText(textWithPointsBuffer, pointsPositionX, initialPointsLocationY + pointsPositionYOffset, m_FontSize, YELLOW);
@@ -152,20 +151,20 @@ void GameScene::RunGetReadyAnimation()
 {
 	const int getReadyTextSizeX = MeasureText(m_GetReadyText, m_FontSize);
 
-	const int halfWindowWidth = static_cast<int>(WINDOW_WIDTH / 2);
-	const int halfWindowHeight = static_cast<int>(WINDOW_HEIGHT / 2);
+	constexpr int halfWindowWidth = static_cast<int>(WINDOW_WIDTH / 2);
+	constexpr int halfWindowHeight = static_cast<int>(WINDOW_HEIGHT / 2);
 	
 	DrawText(m_GetReadyText, halfWindowWidth - static_cast<int>(getReadyTextSizeX / 2), halfWindowHeight - (m_FontSize / 2), m_FontSize, YELLOW);
 
 	const char* roundText = "Round %i";
 
-	char roundTextBuffer[20] = { 0 };
+	char roundTextBuffer[20]{};
 
 	sprintf_s(roundTextBuffer, roundText, m_RoundNumber + 1);
 
 	const int roundTextSizeX = MeasureText(roundTextBuffer, m_FontSize);
 
-	const int distanceBetweenGetReadyAndRoundTextsY = 100;
+	constexpr int distanceBetweenGetReadyAndRoundTextsY = 100;
 
 	DrawText(
 		roundTextBuffer, 

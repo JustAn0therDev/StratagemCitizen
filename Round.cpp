@@ -12,6 +12,7 @@ Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false), m_WasRound
 void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems)
 {
 	srand(static_cast<unsigned int>(time(NULL)));
+	
 	while (m_RandomStratagems.size() < STRATAGEM_AMOUNT_LIMIT) // For now, the amount of stratagems is not random
 	{
 		int random_index = static_cast<int>(rand() / ((RAND_MAX + 1u) / p_Stratagems.size()));
