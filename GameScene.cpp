@@ -17,12 +17,12 @@ void GameScene::SetStratagemVector(std::vector<Stratagem> p_Stratagems)
 	m_Stratagems = p_Stratagems;
 }
 
-void GameScene::Input()
+void GameScene::Input(void)
 {
 	m_CurrentRound.Input();
 }
 
-void GameScene::Update()
+void GameScene::Update(void)
 {
 	if (m_CurrentRound.GetFinished())
 	{
@@ -50,7 +50,7 @@ void GameScene::Update()
 	}
 }
 
-void GameScene::Draw()
+void GameScene::Draw(void)
 {
 	if (!m_CurrentRound.GetFinished())
 	{

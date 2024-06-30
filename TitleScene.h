@@ -16,9 +16,9 @@ private:
 public:
 	TitleScene();
 	virtual bool GetShouldEndScene() const;
-	virtual void Input();
-	virtual void Update();
-	virtual void Draw();
+	virtual void Input(void);
+	virtual void Update(void);
+	virtual void Draw(void);
 
 	const Vector2 GetSubtitleTextPosition(const char* text, int order) const;
 	const void DrawTitle() const;

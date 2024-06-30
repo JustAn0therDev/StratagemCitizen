@@ -24,9 +24,9 @@ private:
 public:
 	GameScene(std::vector<Stratagem> p_Stratagems);
 	void SetStratagemVector(std::vector<Stratagem> p_Stratagems);
-	void Input();
-	void Update();
-	void Draw();
+	void Input(void);
+	void Update(void);
+	void Draw(void);
 	void DrawCurrentPoints();
 	void DrawCurrentRoundTextOnTopRightCorner();
 	bool GetShouldEndScene() const;

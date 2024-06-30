@@ -16,7 +16,7 @@ bool TitleScene::GetShouldEndScene() const
 	return m_ShouldEndScene;
 }
 
-void TitleScene::Input()
+void TitleScene::Input(void)
 {
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 		if (m_SettingsOption.IsHovered()) {
@@ -29,13 +29,13 @@ void TitleScene::Input()
 	}
 }
 
-void TitleScene::Update()
+void TitleScene::Update(void)
 {
 	m_StartOption.Update();
 	m_SettingsOption.Update();
 }
 
-void TitleScene::Draw()
+void TitleScene::Draw(void)
 {
 	DrawTitle();
 	m_StartOption.Draw();

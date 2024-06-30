@@ -16,7 +16,7 @@ const Vector2 UiOption::GetSizeMin() const
 	return Vector2{ 0, 0 };
 }
 
-const Vector2 UiOption::GetRectangleBounds() const // TODO: Rename function to "Get Bounds" or something.
+const Vector2 UiOption::GetRectangleBounds() const
 {
 	int textSizeX = MeasureText(m_Text.c_str(), m_FontSize);
 

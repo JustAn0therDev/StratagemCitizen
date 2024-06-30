@@ -19,7 +19,7 @@ void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stra
 	}
 }
 
-void Round::Input()
+void Round::Input(void)
 {
 	if (m_StratagemIndex < m_RandomStratagems.size())
 	{
@@ -29,7 +29,7 @@ void Round::Input()
 	m_RoundTimer.Input();
 }
 
-void Round::Update()
+void Round::Update(void)
 {
 	if (m_StratagemIndex < m_RandomStratagems.size())
 	{
@@ -56,7 +56,7 @@ void Round::Update()
 	m_RoundTimer.Update();
 }
 
-void Round::Draw()
+void Round::Draw(void)
 {
 	for (size_t i = 0; i < m_RandomStratagems.size(); i++)
 	{

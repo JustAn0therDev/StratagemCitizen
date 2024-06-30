@@ -19,9 +19,9 @@ private:
 public:
 	Round();
 	void SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems);
-	void Input();
-	void Update();
-	void Draw();
+	void Input(void);
+	void Update(void);
+	void Draw(void);
 	bool GetFinished() const;
 	const int GetPoints() const;
 	const int GetPerfectBonus() const;
