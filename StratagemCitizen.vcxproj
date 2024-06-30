@@ -144,7 +144,9 @@
     <ClCompile Include="StratagemConfigParser.cpp" />
     <ClCompile Include="RoundTimer.cpp" />
     <ClCompile Include="TitleScene.cpp" />
-    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="StringFunctions.cpp" />
+    <ClCompile Include="UiFunctions.cpp" />
+    <ClCompile Include="UiOption.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Arrow.h" />
@@ -156,7 +158,9 @@
     <ClInclude Include="StratagemConfigParser.h" />
     <ClInclude Include="RoundTimer.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Utils.h" />
+    <ClInclude Include="StringFunctions.h" />
+    <ClInclude Include="UiFunctions.h" />
+    <ClInclude Include="UiOption.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

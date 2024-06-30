@@ -1,6 +1,6 @@
-#include "Utils.h"
+#include "StringFunctions.h"
 
-const std::vector<std::string> Utils::Split(std::string input, const std::string delimiter)
+const std::vector<std::string> StringFunctions::Split(std::string input, const std::string delimiter)
 {
 	size_t pos = 0;
 	std::vector<std::string> tokens;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "StratagemConfigParser.h"
-#include "Utils.h"
+#include "StringFunctions.h"
 
 StratagemConfigParser::StratagemConfigParser(const char* p_FilePath)
 {
@@ -38,9 +38,7 @@ Stratagem StratagemConfigParser::GetStratagemFromFileLine(std::string& p_FileLin
 	std::string delimiter = "\t";
 	std::string token;
 
-	Utils utils;
-
-	const std::vector<std::string> stratagemTokens = utils.Split(p_FileLine, delimiter);
+	const std::vector<std::string> stratagemTokens = StringFunctions::Split(p_FileLine, delimiter);
 
 	for (auto& token : stratagemTokens)
 	{
@@ -50,7 +48,7 @@ Stratagem StratagemConfigParser::GetStratagemFromFileLine(std::string& p_FileLin
 		}
 		else if (propertyIndex == 1)
 		{
-			const std::vector<std::string> arrowTokens = utils.Split(token, ",");
+			const std::vector<std::string> arrowTokens = StringFunctions::Split(token, ",");
 
 			for (auto& arrowToken : arrowTokens)
 			{
