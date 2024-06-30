@@ -22,6 +22,5 @@ public:
 
 	const Vector2 GetSubtitleTextPosition(const char* text, int order) const;
 	const void DrawTitle() const;
-	const void DrawSubtitle(const UiOption* uiOption) const;
 };
 

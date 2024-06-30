@@ -10,6 +10,7 @@ TitleScene::TitleScene()
 }
 
 // TODO: This should not exist. This should return the scene that will be loaded next.
+// Be it an object, an enum, anything.
 bool TitleScene::GetShouldEndScene() const
 {
 	return m_ShouldEndScene;
@@ -17,38 +18,28 @@ bool TitleScene::GetShouldEndScene() const
 
 void TitleScene::Input()
 {
-	if (IsKeyPressed(KEY_ENTER)) {
-		m_ShouldEndScene = true;
-	}
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+		if (m_SettingsOption.IsHovered()) {
+			// Change scene to Settings Scene
+		}
 
-	if (m_SettingsOption.IsHovered() && IsKeyPressed(MOUSE_BUTTON_LEFT))
-	{
-		// TODO: Change to settings scene.
+		if (m_StartOption.IsHovered()) {
+			m_ShouldEndScene = true;
+		}
 	}
 }
 
 void TitleScene::Update()
 {
-	m_SettingsOption.SetHovered(
-		UiFunctions::IsMouseInsideRectangle(
-			m_SettingsOption.GetPosition(),
-			m_SettingsOption.GetSizeMax()
-		)
-	);
-
-	m_StartOption.SetHovered(
-		UiFunctions::IsMouseInsideRectangle(
-			m_StartOption.GetPosition(),
-			m_StartOption.GetSizeMax()
-		)
-	);
+	m_StartOption.Update();
+	m_SettingsOption.Update();
 }
 
 void TitleScene::Draw()
 {
 	DrawTitle();
-	DrawSubtitle(&m_StartOption);
-	DrawSubtitle(&m_SettingsOption);
+	m_StartOption.Draw();
+	m_SettingsOption.Draw();
 }
 
 const void TitleScene::DrawTitle() const
@@ -64,31 +55,6 @@ const void TitleScene::DrawTitle() const
 		WINDOW_WIDTH / 2 - (stratagemCitizenTitleSizeX / 2),
 		halfWindowHeight - static_cast<int>(m_FontSize / 2),
 		m_FontSize, WHITE);
-}
-
-const void TitleScene::DrawSubtitle(const UiOption* uiOption) const
-{
-	char buffer[250]{};
-	
-	if (uiOption->IsHovered())
-	{
-		sprintf_s(buffer, "> %s <", uiOption->GetText());
-	}
-	else
-	{
-		strcpy_s(buffer, uiOption->GetText());
-	}
-
-	// TODO: Maybe refactor this later so the position calculation is actually a responsibility of the UiOption class?
-	Vector2 originalTextPos = uiOption->GetPosition();
-
-	int bufferTextSizeX = MeasureText(buffer, m_SubtitleFontSize);
-
-	DrawText(buffer,
-		static_cast<float>(WINDOW_WIDTH / 2) - static_cast<float>(bufferTextSizeX / 2),
-		static_cast<int>(originalTextPos.y),
-		m_SubtitleFontSize,
-		WHITE);
 }
 
 const Vector2 TitleScene::GetSubtitleTextPosition(const char* text, int order) const
