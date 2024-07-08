@@ -20,13 +20,12 @@ int main(void)
 
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Stratagem Citizen");
 
-	StratagemConfigParser stratagemConfigParser("StratagemConfig.txt");
+	TitleScene* titleScene = new TitleScene();
 
+	StratagemConfigParser stratagemConfigParser("StratagemConfig.txt");
 	stratagemConfigParser.ParseStratagems();
-	int index = 0;
 	std::vector<Stratagem> stratagems = stratagemConfigParser.GetStratagems();
 
-	TitleScene* titleScene = new TitleScene();
 	GameScene* gameScene = new GameScene(stratagems);
 
 	while (!WindowShouldClose())
