@@ -19,6 +19,7 @@ private:
 	std::chrono::system_clock::time_point m_LastTime;
 	std::chrono::duration<double> m_ElapsedSeconds;
 	const double m_EndRoundTimeLimitInSeconds = 5;
+	bool m_StartingGame;
 
 	void DrawRoundPointsText(const char* text, const int points, const int pointsPositionY) const;
 public:
@@ -29,6 +30,7 @@ public:
 	void Draw(void);
 	void DrawCurrentPoints();
 	void DrawCurrentRoundTextOnTopRightCorner();
+	void UpdateElapsedSeconds();
 	bool GetShouldEndScene() const;
 	void RunRoundEndAnimation();
 	void RunGetReadyAnimation();

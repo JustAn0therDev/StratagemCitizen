@@ -6,7 +6,13 @@
 
 // TODO:
 // Calculate the round, images and text relative to the window size, not with fixed values, like font sizes, for example.
-GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : m_Index(0), m_TotalPoints(0), m_RoundNumber(1), m_ElapsedSeconds(0)
+GameScene::GameScene(std::vector<Stratagem> p_Stratagems) : 
+	m_Index(0),
+	m_TotalPoints(0),
+	m_RoundNumber(1),
+	m_ElapsedSeconds(0),
+	m_StartingGame(true),
+	m_LastTime(std::chrono::system_clock::now())
 {
 	m_Stratagems = p_Stratagems;
 	m_CurrentRound.SetRandomStratagemsFromStratagemVector(p_Stratagems);
@@ -24,15 +30,19 @@ void GameScene::Input(void)
 
 void GameScene::Update(void)
 {
-	if (m_CurrentRound.GetFinished())
+	UpdateElapsedSeconds();
+	
+	if (m_StartingGame)
 	{
-		std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
-		m_ElapsedSeconds = currentTime - m_LastTime;
-
+		if (m_ElapsedSeconds.count() > 3.0)
+		{
+			m_StartingGame = false;
+		}
+	}
+	else if (m_CurrentRound.GetFinished())
+	{
 		if (m_ElapsedSeconds.count() < m_EndRoundTimeLimitInSeconds)
 		{
-			currentTime = std::chrono::system_clock::now();
-			m_ElapsedSeconds = currentTime - m_LastTime;
 			return;
 		}
 
@@ -52,7 +62,11 @@ void GameScene::Update(void)
 
 void GameScene::Draw(void)
 {
-	if (!m_CurrentRound.GetFinished())
+	if (m_StartingGame)
+	{
+		RunGetReadyAnimation();
+	}
+	else if (!m_CurrentRound.GetFinished())
 	{
 		m_CurrentRound.Draw();
 		DrawCurrentRoundTextOnTopRightCorner();
@@ -73,6 +87,12 @@ void GameScene::DrawCurrentRoundTextOnTopRightCorner()
 	int textSizeWithSpacingX = MeasureText(buffer, m_FontSize) + xOffset;
 
 	DrawText(buffer, WINDOW_WIDTH - textSizeWithSpacingX, 0, m_FontSize, YELLOW);
+}
+
+void GameScene::UpdateElapsedSeconds()
+{
+	std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+	m_ElapsedSeconds = currentTime - m_LastTime;
 }
 
 void GameScene::DrawCurrentPoints()
@@ -160,7 +180,9 @@ void GameScene::RunGetReadyAnimation()
 
 	char roundTextBuffer[20]{};
 
-	sprintf_s(roundTextBuffer, roundText, m_RoundNumber + 1);
+	int roundNumber = m_RoundNumber + (m_StartingGame ? 0 : 1);
+
+	sprintf_s(roundTextBuffer, roundText, roundNumber);
 
 	const int roundTextSizeX = MeasureText(roundTextBuffer, m_FontSize);
 
