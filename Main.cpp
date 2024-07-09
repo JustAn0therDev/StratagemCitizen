@@ -7,12 +7,7 @@
 #include "StratagemConfigParser.h"
 #include "TitleScene.h"
 #include "GameScene.h"
-
-const int initialPosY = 260;
-const int posYLimit = 40;
-const float lerpBy = 0.2f;
-bool pressed = false;
-bool endingAnimation = false;
+#include "SceneManager.h"
 
 int main(void)
 {
@@ -20,13 +15,9 @@ int main(void)
 
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Stratagem Citizen");
 
-	TitleScene* titleScene = new TitleScene();
+	SceneManager sceneManager;
 
-	StratagemConfigParser stratagemConfigParser("StratagemConfig.txt");
-	stratagemConfigParser.ParseStratagems();
-	std::vector<Stratagem> stratagems = stratagemConfigParser.GetStratagems();
-
-	GameScene* gameScene = new GameScene(stratagems);
+	Scene* scene = sceneManager.GetNextScenePtr(SceneEnum::TITLE);
 
 	while (!WindowShouldClose())
 	{
@@ -37,21 +28,16 @@ int main(void)
 		BeginDrawing();
 		ClearBackground(BLACK);
 
-		if (titleScene != nullptr) {
-			titleScene->Input();
-			titleScene->Update();
-			titleScene->Draw();
+		if (scene != nullptr) {
+			scene->Input();
+			scene->Update();
+			scene->Draw();
 
-			if (titleScene->GetShouldEndScene()) {
-				delete titleScene;
-				titleScene = nullptr;
+			Scene* nextScenePtr = sceneManager.GetNextScenePtr(scene->GetNextScene());
+
+			if (nextScenePtr) {
+				scene = nextScenePtr;
 			}
-		}
-		else
-		{
-			gameScene->Input();
-			gameScene->Update();
-			gameScene->Draw();
 		}
 	
 		EndDrawing();

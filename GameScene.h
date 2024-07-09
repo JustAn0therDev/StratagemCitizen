@@ -31,7 +31,7 @@ public:
 	void DrawCurrentPoints();
 	void DrawCurrentRoundTextOnTopRightCorner();
 	void UpdateElapsedSeconds();
-	bool GetShouldEndScene() const;
+	SceneEnum GetNextScene() const;
 	void RunRoundEndAnimation();
 	void RunGetReadyAnimation();
 	~GameScene();

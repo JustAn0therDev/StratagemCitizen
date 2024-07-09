@@ -95,6 +95,11 @@ void GameScene::UpdateElapsedSeconds()
 	m_ElapsedSeconds = currentTime - m_LastTime;
 }
 
+SceneEnum GameScene::GetNextScene() const
+{
+	return SceneEnum::NONE; // For now
+}
+
 void GameScene::DrawCurrentPoints()
 {
 	char buffer[30]{};
@@ -105,11 +110,6 @@ void GameScene::DrawCurrentPoints()
 
 	sprintf_s(buffer, "%i", totalPointsPlusRound);
 	DrawText(buffer, WINDOW_WIDTH - static_cast<int>(WINDOW_WIDTH / 5), WINDOW_HEIGHT / 4, m_PointsFontSize, YELLOW);
-}
-
-bool GameScene::GetShouldEndScene() const
-{
-	return true;
 }
 
 GameScene::~GameScene()

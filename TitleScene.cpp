@@ -11,9 +11,9 @@ TitleScene::TitleScene()
 
 // TODO: This should not exist. This should return the scene that will be loaded next.
 // Be it an object, an enum, anything.
-bool TitleScene::GetShouldEndScene() const
+SceneEnum TitleScene::GetNextScene() const
 {
-	return m_ShouldEndScene;
+	return m_ShouldEndScene ? SceneEnum::GAME : SceneEnum::NONE;
 }
 
 void TitleScene::Input(void)

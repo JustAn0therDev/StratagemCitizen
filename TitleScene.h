@@ -15,7 +15,7 @@ private:
 	UiOption m_SettingsOption;
 public:
 	TitleScene();
-	virtual bool GetShouldEndScene() const;
+	virtual SceneEnum GetNextScene() const;
 	virtual void Input(void);
 	virtual void Update(void);
 	virtual void Draw(void);
