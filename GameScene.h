@@ -34,6 +34,7 @@ public:
 	SceneEnum GetNextScene() const;
 	void RunRoundEndAnimation();
 	void RunGetReadyAnimation();
+	void DrawRoundNumber(const int halfWindowWidth, const int halfWindowHeight);
 	~GameScene();
 };
 

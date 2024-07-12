@@ -16,6 +16,7 @@ GameScene::GameScene(std::vector<Stratagem> p_Stratagems) :
 {
 	m_Stratagems = p_Stratagems;
 	m_CurrentRound.SetRandomStratagemsFromStratagemVector(p_Stratagems);
+	m_CurrentRound.SetRoundNumber(m_RoundNumber);
 }
 
 void GameScene::SetStratagemVector(std::vector<Stratagem> p_Stratagems)
@@ -46,10 +47,11 @@ void GameScene::Update(void)
 			return;
 		}
 
+		m_RoundNumber++;
 		m_TotalPoints += m_CurrentRound.GetTotalPoints();
 		m_CurrentRound = Round();
 		m_CurrentRound.SetRandomStratagemsFromStratagemVector(m_Stratagems);
-		m_RoundNumber++;
+		m_CurrentRound.SetRoundNumber(m_RoundNumber);
 
 		m_ElapsedSeconds = m_ElapsedSeconds.zero();
 	}
@@ -176,8 +178,12 @@ void GameScene::RunGetReadyAnimation()
 	
 	DrawText(m_GetReadyText, halfWindowWidth - static_cast<int>(getReadyTextSizeX / 2), halfWindowHeight - (m_FontSize / 2), m_FontSize, YELLOW);
 
-	const char* roundText = "Round %i";
+	DrawRoundNumber(halfWindowWidth, halfWindowHeight);
+}
 
+void GameScene::DrawRoundNumber(const int halfWindowWidth, const int halfWindowHeight)
+{
+	const char* roundText = "Round %i";
 	char roundTextBuffer[20]{};
 
 	int roundNumber = m_RoundNumber + (m_StartingGame ? 0 : 1);
@@ -189,9 +195,9 @@ void GameScene::RunGetReadyAnimation()
 	constexpr int distanceBetweenGetReadyAndRoundTextsY = 100;
 
 	DrawText(
-		roundTextBuffer, 
-		halfWindowWidth - static_cast<int>(roundTextSizeX / 2), 
-		halfWindowHeight + distanceBetweenGetReadyAndRoundTextsY, 
-		m_FontSize, 
+		roundTextBuffer,
+		halfWindowWidth - static_cast<int>(roundTextSizeX / 2),
+		halfWindowHeight + distanceBetweenGetReadyAndRoundTextsY,
+		m_FontSize,
 		YELLOW);
 }

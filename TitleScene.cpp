@@ -20,12 +20,16 @@ void TitleScene::Input(void)
 {
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 		if (m_SettingsOption.IsHovered()) {
-			// Change scene to Settings Scene
+			// TODO: Change scene to Settings Scene
 		}
 
 		if (m_StartOption.IsHovered()) {
 			m_ShouldEndScene = true;
 		}
+	}
+
+	if (IsKeyReleased(KEY_ENTER)) {
+		m_ShouldEndScene = true;
 	}
 }
 

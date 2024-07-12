@@ -26,6 +26,7 @@ public:
 	const int GetPoints() const;
 	const int GetPerfectBonus() const;
 	const int GetTotalPoints() const;
-	const RoundTimer* GetRoundTimer() const;
+	RoundTimer* GetRoundTimer();
+	void SetRoundNumber(int p_RoundNumber);
 };
 

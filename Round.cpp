@@ -7,7 +7,7 @@
 #include "Constants.h"
 #include <time.h>
 
-Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false), m_WasRoundPerfect(true) { }
+Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false), m_WasRoundPerfect(true) {}
 
 void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems)
 {
@@ -97,9 +97,14 @@ const int Round::GetTotalPoints() const
 	return m_Points + GetPerfectBonus() + m_RoundTimer.GetRoundTimerBonus();
 }
 
-const RoundTimer* Round::GetRoundTimer() const
+RoundTimer* Round::GetRoundTimer()
 {
 	return &m_RoundTimer;
+}
+
+void Round::SetRoundNumber(int p_RoundNumber)
+{
+	m_RoundTimer.SetRoundNumber(p_RoundNumber);
 }
 
 const int Round::GetPerfectBonus() const

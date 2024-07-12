@@ -9,7 +9,9 @@ private:
 	int m_UpdateRectangleWidth;
 	int m_InitialPosX;
 	int m_InitialPosY;
+	int m_RoundNumber;
 	int m_RectangleHeight;
+	int m_MakeRectangleWidthSmallerBy;
 	bool m_IsTimeUp;
 public:
 	RoundTimer();
@@ -20,5 +22,6 @@ public:
 	// This method adds a few pixels to the rectangle that represents the total time.
 	const void AddTime();
 	const int GetRoundTimerBonus() const;
+	void SetRoundNumber(int p_RoundNumber);
 };
 

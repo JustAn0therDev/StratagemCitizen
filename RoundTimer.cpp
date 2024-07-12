@@ -4,7 +4,13 @@
 #include <chrono>
 #include <raymath.h>
 
-RoundTimer::RoundTimer() : m_UpdateRectangleWidth(400), m_DrawRectangleWidth(400), m_RectangleHeight(25), m_IsTimeUp(false)
+RoundTimer::RoundTimer() : 
+	m_UpdateRectangleWidth(400),
+	m_DrawRectangleWidth(400),
+	m_RectangleHeight(25),
+	m_IsTimeUp(false),
+	m_RoundNumber(1),
+	m_MakeRectangleWidthSmallerBy(3)
 {
 	const int halfWindowWidth = WINDOW_WIDTH / 2;
 	const int halfWindowHeight = WINDOW_HEIGHT / 2;
@@ -32,7 +38,7 @@ void RoundTimer::Update()
 
 	if (elapsedSeconds.count() > 0.2f)
 	{
-		m_UpdateRectangleWidth -= 5; // Completely arbitrary number.
+		m_UpdateRectangleWidth -= m_MakeRectangleWidthSmallerBy * m_RoundNumber;
 		m_LastTime = currentTime;
 	}
 }
@@ -56,4 +62,9 @@ const void RoundTimer::AddTime()
 const int RoundTimer::GetRoundTimerBonus() const
 {
 	return static_cast<int>(m_UpdateRectangleWidth * 0.1);
+}
+
+void RoundTimer::SetRoundNumber(int p_RoundNumber)
+{
+	m_RoundNumber = p_RoundNumber;
 }

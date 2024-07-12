@@ -11,8 +11,6 @@
 
 int main(void)
 {
-	// MAYBE: Option to have all arrows that point to the same direction with the same color
-
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Stratagem Citizen");
 
 	SceneManager sceneManager;
