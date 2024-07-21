@@ -23,12 +23,17 @@ SceneManager::~SceneManager()
 
 void SceneManager::InstantiateGameScene()
 {
+	std::vector<Stratagem> stratagems = LoadStratagems();
+
+	m_GameScene = new GameScene(stratagems);
+}
+
+std::vector<Stratagem> SceneManager::LoadStratagems()
+{
 	StratagemConfigParser stratagemConfigParser("StratagemConfig.txt");
 	stratagemConfigParser.ParseStratagems();
 
-	std::vector<Stratagem> stratagems = stratagemConfigParser.GetStratagems();
-
-	m_GameScene = new GameScene(stratagems);
+	return stratagemConfigParser.GetStratagems();
 }
 
 Scene* SceneManager::GetNextScenePtr(SceneEnum nextScene)

@@ -9,6 +9,8 @@ private:
 	GameScene* m_GameScene;
 	void InstantiateGameScene();
 
+	std::vector<Stratagem> LoadStratagems();
+
 public:
 	SceneManager();
 	~SceneManager();

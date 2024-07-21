@@ -32,21 +32,19 @@ Stratagem StratagemConfigParser::GetStratagemFromFileLine(std::string& p_FileLin
 	std::string stratagemName;
 	std::vector<Arrow> arrows;
 	std::string imagePath;
-
-	size_t propertyIndex = 0;
-	size_t position = 0;
-	std::string delimiter = "\t";
-	std::string token;
-
+	
+	const std::string delimiter = "\t";
 	const std::vector<std::string> stratagemTokens = StringFunctions::Split(p_FileLine, delimiter);
 
-	for (auto& token : stratagemTokens)
+	for (size_t i = 0; i < stratagemTokens.size(); i++)
 	{
-		if (propertyIndex == 0)
+		const std::string& token = stratagemTokens[i];
+
+		if (i == 0)
 		{
 			stratagemName = token;
 		}
-		else if (propertyIndex == 1)
+		else if (i == 1)
 		{
 			const std::vector<std::string> arrowTokens = StringFunctions::Split(token, ",");
 
@@ -55,13 +53,12 @@ Stratagem StratagemConfigParser::GetStratagemFromFileLine(std::string& p_FileLin
 				arrows.push_back(GetArrowFromStratagemToken(arrowToken));
 			}
 		}
-		else if (propertyIndex == 2)
+		else if (i == 2)
 		{
 			imagePath = token;
 		}
 
-		p_FileLine.erase(0, position + delimiter.length());
-		propertyIndex++;
+		p_FileLine.erase(0, delimiter.length());
 	}
 
 	return Stratagem(stratagemName.c_str(), arrows, ("Assets/" + imagePath).c_str());
