@@ -4,6 +4,7 @@
 SceneManager::SceneManager()
 {
 	m_TitleScene = new TitleScene();
+	m_GameOverScene = new GameOverScene();
 
 	InstantiateGameScene();
 }
@@ -45,6 +46,8 @@ Scene* SceneManager::GetNextScenePtr(SceneEnum nextScene)
 		return m_GameScene;
 	case SceneEnum::TITLE:
 		return m_TitleScene;
+	case SceneEnum::GAMEOVER:
+		return m_GameOverScene;
 	default:
 		return nullptr;
 	}

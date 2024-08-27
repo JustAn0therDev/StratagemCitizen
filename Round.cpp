@@ -7,7 +7,7 @@
 #include "Constants.h"
 #include <time.h>
 
-Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false), m_WasRoundPerfect(true) {}
+Round::Round() : m_Points(0), m_StratagemIndex(0), m_Finished(false), m_GameOver(false), m_WasRoundPerfect(true) {}
 
 void Round::SetRandomStratagemsFromStratagemVector(std::vector<Stratagem> p_Stratagems)
 {
@@ -49,7 +49,12 @@ void Round::Update(void)
 		}
 	}
 
-	if (m_StratagemIndex == m_RandomStratagems.size() || m_RoundTimer.GetIsTimeUp())
+	if (m_RoundTimer.GetIsTimeUp())
+	{
+		m_GameOver = true;
+	}
+
+	if (m_StratagemIndex == m_RandomStratagems.size())
 	{
 		m_Finished = true;
 	}
@@ -85,6 +90,11 @@ void Round::Draw(void)
 bool Round::GetFinished() const
 {
 	return m_Finished;
+}
+
+bool Round::GetGameOver() const
+{
+	return m_GameOver;
 }
 
 const int Round::GetPoints() const

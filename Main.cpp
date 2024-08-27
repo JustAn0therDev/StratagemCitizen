@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <iostream>
 #include "raylib.h"
 #include "raymath.h"
@@ -33,7 +34,8 @@ int main(void)
 
 			Scene* nextScenePtr = sceneManager.GetNextScenePtr(scene->GetNextScene());
 
-			if (nextScenePtr) {
+			if (nextScenePtr) 
+			{
 				scene = nextScenePtr;
 			}
 		}

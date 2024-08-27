@@ -4,5 +4,6 @@ enum SceneEnum {
 	TITLE,
 	SETTINGS,
 	GAME,
-	GAMEOVER
+	GAMEOVER,
+	LEADERBOARD
 };

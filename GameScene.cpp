@@ -99,7 +99,11 @@ void GameScene::UpdateElapsedSeconds()
 
 SceneEnum GameScene::GetNextScene() const
 {
-	return SceneEnum::NONE; // For now
+	if (m_CurrentRound.GetGameOver()) {
+		return SceneEnum::GAMEOVER;
+	}
+
+	return SceneEnum::NONE;
 }
 
 void GameScene::DrawCurrentPoints()
