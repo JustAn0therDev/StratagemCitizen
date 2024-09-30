@@ -22,7 +22,7 @@ void StratagemConfigParser::ParseStratagems()
 		std::string line;
 		while (std::getline(stratagemConfigFile, line))
 		{
-			m_Stratagems.push_back(GetStratagemFromFileLine(line));
+			m_Stratagems.emplace_back(GetStratagemFromFileLine(line));
 		}
 	}
 }
@@ -50,7 +50,7 @@ Stratagem StratagemConfigParser::GetStratagemFromFileLine(std::string& p_FileLin
 
 			for (auto& arrowToken : arrowTokens)
 			{
-				arrows.push_back(GetArrowFromStratagemToken(arrowToken));
+				arrows.emplace_back(GetArrowFromStratagemToken(arrowToken));
 			}
 		}
 		else if (i == 2)
